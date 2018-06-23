@@ -221,7 +221,7 @@ client.on('message', message => {
       message.member.voiceChannel.join()
         .then(connection => { // Connection is an instance of VoiceConnection
           message.channel.send('I have successfully connected to the channel!');
-          const audio = connection.playStream(b);
+          const audio = connection.playArbitraryInput(b);
           audio.setVolume(c); // Set the volume back to 100%
         })
         .catch(console.log);
