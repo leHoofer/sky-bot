@@ -3,7 +3,6 @@ var fs = require('fs');
 const client = new discord.Client();
 var sleep = require('system-sleep');
 var request = require('request');
-var urlExists = require('url-exists');
 var ytdl = require('ytdl-core');
 
 client.on('ready', () => {
