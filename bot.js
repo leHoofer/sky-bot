@@ -210,7 +210,7 @@ client.on('message', message => {
     let b = a[1]
     let c = a[2]
     if (b == undefined) {
-      message.channel.send("You did not input a Youatube URL.")
+      message.channel.send("You did not input a Youtube URL.")
     } else {
     if (c == undefined) {
         c = 1
@@ -221,7 +221,7 @@ client.on('message', message => {
       message.member.voiceChannel.join()
         .then(connection => { // Connection is an instance of VoiceConnection
           message.channel.send('I have successfully connected to the channel!');
-          const audio = connection.playArbitraryInput(b);
+          const audio = connection.playStream(ytdl(b));
           audio.setVolume(c); // Set the volume back to 100%
         })
         .catch(console.log);
