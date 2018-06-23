@@ -214,6 +214,19 @@ client.on('message', message => {
     } else {
     if (c == undefined) {
         c = 1
+        if (message.member.voiceChannel) {
+          message.channel.send("Joining Voice Channel.")
+          message.member.voiceChannel.join()
+            .then(connection => { // Connection is an instance of VoiceConnection
+              message.channel.send('I have successfully connected to the channel!');
+              const audio = connection.playStream(ytdl(b));
+              audio.setVolume(c); // Set the volume back to 100%
+            })
+            .catch(console.log);
+        } else {
+          message.reply('You need to join a voice channel first!');
+        }
+
     } else {
     
     if (message.member.voiceChannel) {
