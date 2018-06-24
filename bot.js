@@ -30,6 +30,24 @@ jokes = [
   "What did the skeleton say to the puppy? Bonappetite."
 ]
 
+randomm = [
+"3.14",
+"hi there",
+"im bill.",
+"call me chuck",
+"nemo made me",
+"just keep swimming",
+"only you can prevent wild fires.",
+"superman saves the day again.",
+"what's that? oh it's nothing nevermind.",
+"honestly, people are really stupid.",
+"bot's shall take over the world.",
+"go away",
+"i like apple pie",
+"is apple pie even a thing?",
+"blueberries."
+]
+
 roasts = [
   "Coming Soon"
 ]
@@ -65,6 +83,13 @@ client.on('message', message => {
 client.on('message', message => {
   if(message.content == "!?!joke") {
     var rand = jokes[Math.floor(Math.random() * jokes.length)];
+    message.channel.send(rand)
+  }
+})
+
+client.on('message', message => {
+  if(message.content == "!?!random") {
+    var rand = randomm[Math.floor(Math.random() * randomm.length)];
     message.channel.send(rand)
   }
 })
