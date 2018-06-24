@@ -213,6 +213,17 @@ client.on('message', message => {
     }
 }})
 
+client.on('message', message => {
+  if (message.content === "!?!restart") {
+    if (message.author.id !== "207323008526843904") {
+      message.channel.send("Not enough authorization.")
+    } else {
+      client.destroy()
+      client.login(process.env.BOT_TOKEN)
+    }
+  }
+})
+
 
 client.on('message', message => {
   if (message.content.startsWith("!?!owner")) {
