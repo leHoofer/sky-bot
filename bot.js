@@ -157,6 +157,16 @@ client.on('message', message => {
     }
     }});
 
+    client.on('message', message => {
+      if (message.content.startsWith("!?!math")) {
+        let a = message.content.split(" ")
+        let b = a.slice(1)
+        let result = b.join(" ")
+        message.delete()
+        message.channel.send(Number(result))
+      }});
+  
+
   client.on('message', message => {
     if (message.content.startsWith("!?!say")) {
       let a = message.content.split(" ")
