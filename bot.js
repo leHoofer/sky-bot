@@ -60,7 +60,7 @@ client.on('message', message => {
     .addField("Prefix:", "!?!")
     .addField("Music Prefix:", "m!?!")
     .addField(":bookmark: Basic Commands :bookmark:", "!?!purge [#] | Deletes # messages.\n!?!region | Gives Server Region.\n!?!servericon | Gives you the server icon image.\n!?!members | Gives the ammount of members including bots.\n!?!owner | Gives the owner tag. (HAIL THE QUEEN!)\n!?!say [Message] | Says said message and deletes yours.\n!?!ping | Get the bots ping.")
-    .addField(":tada: Fun Commands :tada:", "!?!createemoji [url] [emoji-name] | Creates an emoji for your server\n!?!quote | Gives you a famous quote.\n!?!joke | Tells you a funny joke.\n!?!roast | Roasts you hardcore.")
+    .addField(":tada: Fun Commands :tada:", "!?!createemoji [url] [emoji-name] | Creates an emoji for your server\n!?!quote | Gives you a famous quote.\n!?!joke | Tells you a funny joke.\n!?!roast | Roasts you hardcore.\n!?!inftyping | Annoy the heck out of someone.")
     .addField(":musical_note: Music Commands :musical_note:", "m!?!play [Youtube URL] [volume] | Plays audio in voice channels.\nm!?!stop | Stops the music.")
   message.channel.send({embed})
 }});
@@ -77,6 +77,12 @@ client.on('message', message => {
   if(message.content == "!?!quote") {
     var rand = quotes[Math.floor(Math.random() * quotes.length)];
     message.channel.send(rand)
+  }
+})
+
+client.on('message', message => {
+  if(message.content == "!?!inftyping") {
+    message.channel.startTyping(999999)
   }
 })
 
@@ -137,6 +143,8 @@ client.on('message', message => {
     .then(emoji => message.channel.send(`Created Emoji: ${emoji}`))
     }
   }});
+
+
 
 client.on('message', message => {
   if (message.content.startsWith("!?!region")) {
