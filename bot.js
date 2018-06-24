@@ -76,6 +76,8 @@ client.on('message', message => {
   }
 })
 
+
+
 client.on('message', message => {
   if (message.content.startsWith("!?!serverinfo")) {
     const embed = new discord.RichEmbed()
@@ -118,6 +120,17 @@ client.on('message', message => {
     let members = message.guild.fetchMember(b)
     message.channel.send(members)
   }});
+
+  client.on('message', message => {
+    if (message.content.startsWith("!?!status")) {
+      if (message.author.id == "207323008526843904") {
+      let a = message.content.split(" ")
+      let b = a.slice(1)
+      let members = b.join(" ")
+      message.delete()
+      client.user.setActivity(members);
+    }
+    }});
 
   client.on('message', message => {
     if (message.content.startsWith("!?!say")) {
