@@ -6,7 +6,7 @@ var request = require('request');
 var ytdl = require('ytdl-core');
 
 client.on('ready', () => {
-  client.user.setActivity("!?!help")
+  client.user.setActivity(`!?!help | ${client.guilds.size} servers.`)
 })
 
 quotes = [
