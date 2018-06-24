@@ -207,7 +207,6 @@ client.on('message', message => {
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
 
-        message.channel.sendCode("1x", clean(evaled));
     
     } catch(err) {
       message.channel.send(`Error 404: ${clean(err)}`)
