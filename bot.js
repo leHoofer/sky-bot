@@ -186,7 +186,33 @@ client.on('message', message => {
     description: mem
   }})
 }});
-	
+  
+
+function clean(text) {
+  if (typeof(text) === "string")
+  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  else
+      return text;
+}
+
+client.on('message', message => {
+  if (message.content.startsWith("!?!eval")) {
+    if (message.author.id !== "207323008526843904") return;
+    try {
+      var code = params.join(" ");
+      var evaled = eval(code);
+
+      if (typeof evaled !== "string")
+        evaled = require("util").inspect(evaled);
+
+        message.channel.sendCode("1x", clean(evaled));
+    
+    } catch(err) {
+      message.channel.send(`Error 404: ${clean(err)}`)
+    }
+}})
+
+
 client.on('message', message => {
   if (message.content.startsWith("!?!owner")) {
   var owner = "Your king/queen is: "
