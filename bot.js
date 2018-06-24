@@ -199,7 +199,9 @@ client.on('message', message => {
   if (message.content.startsWith("!?!eval")) {
     if (message.author.id !== "207323008526843904") return;
     try {
-      var code = params.join(" ");
+      let a = message.content.split(" ")
+      let b = a.slice(1)
+      let code = b.join(" ")
       var evaled = eval(code);
 
       if (typeof evaled !== "string")
