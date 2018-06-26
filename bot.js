@@ -83,7 +83,10 @@ client.on('message', message => {
 client.on('message', message => {
   if(message.content == "!?!giveaway") {
     message.channel.send("React with :confetti_ball: to enter\nEnding in 15 seconds").then((msg)=>{
-      msg.react("🎊")
+      msg.react("🎊").then((emogi)=> {
+        sleep(15000)
+        message.channel.send(emogi.users);
+      })
     })
   }
 })
