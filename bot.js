@@ -81,6 +81,14 @@ client.on('message', message => {
 })
 
 client.on('message', message => {
+  if(message.content == "!?!giveaway") {
+    message.channel.send("React with :confetti_ball: to enter\nEnding in 15 seconds").then((msg)=>{
+      msg.react("confetti_ball")
+    })
+  }
+})
+
+client.on('message', message => {
   if(message.content == "!?!inftyping") {
     message.channel.startTyping(999999)
   }
