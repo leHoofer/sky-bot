@@ -85,7 +85,7 @@ client.on('message', message => {
     message.channel.send("React with :confetti_ball: to enter\nEnding in 15 seconds").then((msg)=>{
       msg.react("🎊").then((emogi)=> {
         sleep(15000)
-        message.channel.send("Giveaway ended. A total of " + `${emogi.count - 1}` + "people have entered.")
+        message.channel.send("Giveaway ended. A total of " + `${emogi.count - 1}` + " people have entered.")
         console.log(emogi.users);
       })
     })
