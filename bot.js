@@ -261,6 +261,16 @@ client.on('message', message => {
   message.channel.send({embed})
 }});
 
+client.on('message', message => {
+  if (message.content.startsWith("!?!setup-dreamlog")) {
+    if (message.guild.channels.find("name","Dream Logs")) {
+      var a = message.guild.channels.find("name","Dream Logs")
+    } else {
+      var a = message.guild.createChannel("Dream Logs", "category")
+    }
+    var b = message.guild.createChannel(`${message.author.username}`,"text",{parent: a})
+    
+}});
 
 client.on('message', message => {
   if (message.content.startsWith("!?!servericon")) {
