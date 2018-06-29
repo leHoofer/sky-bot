@@ -59,19 +59,40 @@ client.on('message', message => {
     .setColor(3447003)
     .addField("Prefix:", "!?!")
     .addField("Music Prefix:", "m!?!")
-    .addField(":bookmark: Basic Commands :bookmark:", "!?!purge [#] | Deletes # messages.\n!?!region | Gives Server Region.\n!?!servericon | Gives you the server icon image.\n!?!members | Gives the ammount of members including bots.\n!?!owner | Gives the owner tag. (HAIL THE QUEEN!)\n!?!say [Message] | Says said message and deletes yours.\n!?!ping | Get the bots ping.")
+    .addField(":bookmark: Basic Commands :bookmark:", "!?!botinfo | Get info about the bot\n!?!purge [#] | Deletes # messages.\n!?!region | Gives Server Region.\n!?!servericon | Gives you the server icon image.\n!?!members | Gives the ammount of members including bots.\n!?!owner | Gives the owner tag. (HAIL THE QUEEN!)\n!?!say [Message] | Says said message and deletes yours.\n!?!ping | Get the bots ping.")
     .addField(":tada: Fun Commands :tada:", "!?!createemoji [url] [emoji-name] | Creates an emoji for your server\n!?!quote | Gives you a famous quote.\n!?!joke | Tells you a funny joke.\n!?!roast | Roasts you hardcore.\n!?!inftyping | Annoy the heck out of someone.")
     .addField(":musical_note: Music Commands :musical_note:", "m!?!play [Youtube URL] [volume] | Plays audio in voice channels.\nm!?!stop | Stops the music.")
+    .addField(":game_die: Miscellaneous :game_die:", "!?!dreamlog [paragraph] | Log all of your dreams in a new way.")
   message.channel.send({embed})
 }});
 
 
+client.on('message', message => {
+  if(message.content == "!?!botinfo") {
+    message.channel.send('Sadly, we have not finished this. Stay tuned.');
+  }
+})
 
 client.on('message', message => {
   if(message.content == "!?!ping") {
     message.channel.send('Pong! Your ping is `' + `${message.createdTimestamp - Date.now()}` + ' ms`');
   }
 })
+
+client.on('message', message => {
+  if (message.content.startsWith("!?!dreamlog")) {
+    let a = message.content.split(" ")
+    let b = a.slice(1)
+    let test = b.join(" ")
+    
+    message.delete()
+    const embed = new discord.RichEmbed()
+    .setTitle(`${message.author.name}'s dream log`)
+    .setDescription(test)
+    .setColor(3447003)
+    .setTimestamp()
+    message.channel.send({embed})
+  }});
 
 client.on('message', message => {
   if(message.content == "!?!quote") {
@@ -86,7 +107,10 @@ client.on('message', message => {
       msg.react("🎊").then((emogi)=> {
         sleep(15000)
         message.channel.send("Giveaway ended. A total of " + `${emogi.count - 1}` + " people have entered.")
-        console.log(emogi.users);
+        sleep(500)
+        message.channel.send("And the winner is...")
+        sleep(500)
+        message.channel.send(emogi.users);
       })
     })
   }
