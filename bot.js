@@ -84,10 +84,10 @@ client.on('message', message => {
     let a = message.content.split(" ")
     let b = a.slice(1)
     let test = b.join(" ")
-    
+    let author = message.author
     message.delete()
     const embed = new discord.RichEmbed()
-    .setTitle(`${message.author.name}'s dream log`)
+    .setTitle(`${author}'s Dream Log`)
     .setDescription(test)
     .setColor(3447003)
     .setTimestamp()
