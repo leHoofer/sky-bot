@@ -87,7 +87,7 @@ client.on('message', message => {
     let author = message.author.username
     message.delete()
     const embed = new discord.RichEmbed()
-    .setTitle(`${author}'s Dream Log`)
+    .setTitle(`${author}#${message.author.discriminator}'s Dream Log`)
     .setDescription(test)
     .setColor(3447003)
     .setTimestamp()
