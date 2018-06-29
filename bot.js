@@ -84,7 +84,7 @@ client.on('message', message => {
     let a = message.content.split(" ")
     let b = a.slice(1)
     let test = b.join(" ")
-    let author = message.author
+    let author = message.author.username
     message.delete()
     const embed = new discord.RichEmbed()
     .setTitle(`${author}'s Dream Log`)
