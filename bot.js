@@ -234,7 +234,7 @@ client.on('message', message => {
       }});
 
   client.on('message', message => {
-    if (message.content.startsWith("!?!purge")) {
+    if (message.content.startsWith("!?!purge") ) {
       message.delete();
       var bbb = message.content.split(" ")
       var ammount = bbb[1]
@@ -242,11 +242,15 @@ client.on('message', message => {
 message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
       const embed = new discord.RichEmbed()
       .setColor(3447003)
-      .setTitle("Messages Pruned.")
+      .setTitle("Messages Purged.")
       .setDescription("Deleted: " + ammount + " Messages.")
     message.channel.send({embed})
     sleep(10000)
-  }});
+  }else { 
+  if (message.content.startsWith("!?!prune")) { 
+    message.channel.send("Incorrect Syntax, Use !?!purge [#]") }
+  }
+  });
 
 client.on('message', message => {
   if (message.content.startsWith("<@459885159856996353> prefix")) {
