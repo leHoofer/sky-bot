@@ -49,7 +49,9 @@ randomm = [
 ]
 
 roasts = [
-  "Coming Soon"
+  "your fat",
+  "Move out of your mom's basement..."
+  "we don't have enough roasts!"
 ]
 
 client.on('message', message => {
@@ -156,6 +158,17 @@ client.on('message', message => {
     .addField(":crown: Owner", "Server Owner: <@" + message.guild.ownerID + ">")
     .addField(":envelope: Invite", "Invite Link: " + "Coming Soon:tm:")
     .addField(":flag_white: Server Region", "Region: " + message.guild.region)
+  message.channel.send({embed})
+}});
+
+client.on('message', message => {
+  if (message.content.startsWith("!?!serverinfo")) {
+    const embed = new discord.RichEmbed()
+    .setTitle("Server Info:")
+    .setColor(3447003)
+    .addField(":crown: Bot Creator", "Nemo#4298")
+	.addField(":envelope_with_arrow: Add me", "https://discordapp.com/api/oauth2/authorize?client_id=459885159856996353&permissions=8&scope=bot")
+	.addField(":desktop: Version: ", "1.2.4")
   message.channel.send({embed})
 }});
 
