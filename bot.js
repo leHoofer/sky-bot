@@ -50,7 +50,7 @@ randomm = [
 
 roasts = [
   "your fat",
-  "Move out of your mom's basement..."
+  "Move out of your mom's basement...",
   "we don't have enough roasts!"
 ]
 
