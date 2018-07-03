@@ -6,7 +6,7 @@ var request = require('request');
 var ytdl = require('ytdl-core');
 
 client.on('ready', () => {
-  client.user.setActivity(`!?!help | ${client.guilds.size} servers.`)
+  client.user.setActivity(`-help | ${client.guilds.size} servers.`)
 })
 
 quotes = [
@@ -55,34 +55,29 @@ roasts = [
 ]
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!help")) {
+  if (message.content.startsWith("-help")) {
     const embed = new discord.RichEmbed()
     .setTitle(":scroll: Help and Commands :scroll:")
     .setColor(3447003)
-    .addField("Prefix:", "!?!")
-    .addField("Music Prefix:", "m!?!")
-    .addField(":bookmark: Basic Commands :bookmark:", "!?!botinfo | Get info about the bot\n!?!purge [#] | Deletes # messages.\n!?!region | Gives Server Region.\n!?!servericon | Gives you the server icon image.\n!?!members | Gives the ammount of members including bots.\n!?!owner | Gives the owner tag. (HAIL THE QUEEN!)\n!?!say [Message] | Says said message and deletes yours.\n!?!ping | Get the bots ping.")
-    .addField(":tada: Fun Commands :tada:", "!?!createemoji [url] [emoji-name] | Creates an emoji for your server\n!?!quote | Gives you a famous quote.\n!?!joke | Tells you a funny joke.\n!?!roast | Roasts you hardcore.\n!?!inftyping | Annoy the heck out of someone.")
-    .addField(":musical_note: Music Commands :musical_note:", "m!?!play [Youtube URL] [volume] | Plays audio in voice channels.\nm!?!stop | Stops the music.")
-    .addField(":game_die: Miscellaneous :game_die:", "!?!dreamlog [paragraph] | Log all of your dreams in a new way.")
+    .addField("Prefix:", "-")
+    .addField("Music Prefix:", "m-")
+    .addField(":bookmark: Basic Commands :bookmark:", "-botinfo | Get info about the bot\n-purge [#] | Deletes # messages.\n-region | Gives Server Region.\n-servericon | Gives you the server icon image.\n-members | Gives the ammount of members including bots.\n-owner | Gives the owner tag. (HAIL THE QUEEN!)\n-say [Message] | Says said message and deletes yours.\n-ping | Get the bots ping.")
+    .addField(":tada: Fun Commands :tada:", "-createemoji [url] [emoji-name] | Creates an emoji for your server\n-quote | Gives you a famous quote.\n-joke | Tells you a funny joke.\n-roast | Roasts you hardcore.\n-inftyping | Annoy the heck out of someone.")
+    .addField(":musical_note: Music Commands :musical_note:", "m-play [Youtube URL] [volume] | Plays audio in voice channels.\nm-stop | Stops the music.")
+    .addField(":game_die: Miscellaneous :game_die:", "-dreamlog [paragraph] | Log all of your dreams in a new way.")
   message.channel.send({embed})
 }});
 
 
-client.on('message', message => {
-  if(message.content == "!?!botinfo") {
-    message.channel.send('Sadly, we have not finished this. Stay tuned.');
-  }
-})
 
 client.on('message', message => {
-  if(message.content == "!?!ping") {
+  if(message.content == "-ping") {
     message.channel.send('Pong! Your ping is `' + `${message.createdTimestamp - Date.now()}` + ' ms`');
   }
 })
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!dreamlog")) {
+  if (message.content.startsWith("-dreamlog")) {
     let a = message.content.split(" ")
     let b = a.slice(1)
     let test = b.join(" ")
@@ -97,14 +92,14 @@ client.on('message', message => {
   }});
 
 client.on('message', message => {
-  if(message.content == "!?!quote") {
+  if(message.content == "-quote") {
     var rand = quotes[Math.floor(Math.random() * quotes.length)];
     message.channel.send(rand)
   }
 })
 
 client.on('message', message => {
-  if(message.content == "!?!giveaway") {
+  if(message.content == "-giveaway") {
     message.channel.send("React with :confetti_ball: to enter\nEnding in 15 seconds").then((msg)=>{
       msg.react("🎊").then((emogi)=> {
         sleep(15000)
@@ -119,27 +114,27 @@ client.on('message', message => {
 })
 
 client.on('message', message => {
-  if(message.content == "!?!inftyping") {
+  if(message.content == "-inftyping") {
     message.channel.startTyping(999999)
   }
 })
 
 client.on('message', message => {
-  if(message.content == "!?!joke") {
+  if(message.content == "-joke") {
     var rand = jokes[Math.floor(Math.random() * jokes.length)];
     message.channel.send(rand)
   }
 })
 
 client.on('message', message => {
-  if(message.content == "!?!random") {
+  if(message.content == "-random") {
     var rand = randomm[Math.floor(Math.random() * randomm.length)];
     message.channel.send(rand)
   }
 })
 
 client.on('message', message => {
-  if(message.content == "!?!roast") {
+  if(message.content == "-roast") {
     var rand = roasts[Math.floor(Math.random() * roasts.length)];
     message.channel.send(rand)
   }
@@ -148,7 +143,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!serverinfo")) {
+  if (message.content.startsWith("-serverinfo")) {
     const embed = new discord.RichEmbed()
     .setTitle("Server Info:")
     .setColor(3447003)
@@ -162,13 +157,13 @@ client.on('message', message => {
 }});
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!serverinfo")) {
+  if (message.content.startsWith("-botinfo")) {
     const embed = new discord.RichEmbed()
     .setTitle("Server Info:")
     .setColor(3447003)
     .addField(":crown: Bot Creator", "Nemo#4298")
 	.addField(":envelope_with_arrow: Add me", "https://discordapp.com/api/oauth2/authorize?client_id=459885159856996353&permissions=8&scope=bot")
-	.addField(":desktop: Version: ", "1.2.4")
+	.addField(":desktop: Version", "1.2.4")
   message.channel.send({embed})
 }});
 
@@ -181,12 +176,12 @@ client.on('guildMemberAdd', member => {
 
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!createemoji")) {
+  if (message.content.startsWith("-createemoji")) {
     let a = message.content.split(" ")
     let b = a[1]
     let c = a[2]
     if(b == undefined) {
-    message.channel.send("Invalid Syntax !?!createemoji [url] [emoji-name]")
+    message.channel.send("Invalid Syntax -createemoji [url] [emoji-name]")
     } else {
     message.guild.createEmoji(b,c)
     .then(emoji => message.channel.send(`Created Emoji: ${emoji}`))
@@ -196,7 +191,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!region")) {
+  if (message.content.startsWith("-region")) {
     let a = message.content.split(" ")
     let b = a[1]
     let members = message.guild.fetchMember(b)
@@ -204,7 +199,7 @@ client.on('message', message => {
   }});
 
   client.on('message', message => {
-    if (message.content.startsWith("!?!status")) {
+    if (message.content.startsWith("-status")) {
       if (message.author.id == "207323008526843904") {
       let a = message.content.split(" ")
       let b = a.slice(1)
@@ -215,7 +210,7 @@ client.on('message', message => {
     }});
 
     client.on('message', message => {
-      if (message.content.startsWith("!?!math")) {
+      if (message.content.startsWith("-math")) {
         let a = message.content.split(" ")
         let b = a.slice(1)
         let result = b.join(" ")
@@ -225,7 +220,7 @@ client.on('message', message => {
   
 
   client.on('message', message => {
-    if (message.content.startsWith("!?!say")) {
+    if (message.content.startsWith("-say")) {
       let a = message.content.split(" ")
       let b = a.slice(1)
       let members = b.join(" ")
@@ -234,7 +229,7 @@ client.on('message', message => {
     }});
 
     client.on('message', message => {
-      if (message.content.startsWith("!?!embed")) {
+      if (message.content.startsWith("-embed")) {
         let a = message.content.split(" ")
         let b = a.slice(1)
         let test = b.join(" ")
@@ -247,7 +242,7 @@ client.on('message', message => {
       }});
 
   client.on('message', message => {
-    if (message.content.startsWith("!?!purge") ) {
+    if (message.content.startsWith("-purge") ) {
       message.delete();
       var bbb = message.content.split(" ")
       var ammount = bbb[1]
@@ -260,8 +255,8 @@ message.channel.fetchMessages({limit: messagecount}).then(messages => message.ch
     message.channel.send({embed})
     sleep(10000)
   }else { 
-  if (message.content.startsWith("!?!prune")) { 
-    message.channel.send("Incorrect Syntax, Use !?!purge [#]") }
+  if (message.content.startsWith("-prune")) { 
+    message.channel.send("Incorrect Syntax, Use -purge [#]") }
   }
   });
 
@@ -270,12 +265,12 @@ client.on('message', message => {
     const embed = new discord.RichEmbed()
     .setTitle("Current Prefix")
     .setColor(3447003)
-    .setDescription("Prefix is !?!")
+    .setDescription("Prefix is -")
   message.channel.send({embed})
 }});
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!setup-dreamlog")) {
+  if (message.content.startsWith("-setup-dreamlog")) {
     if (message.guild.channels.find("name","Dream Logs")) {
       var a = message.guild.channels.find("name","Dream Logs")
     } else {
@@ -286,7 +281,7 @@ client.on('message', message => {
 }});
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!servericon")) {
+  if (message.content.startsWith("-servericon")) {
     const embed = new discord.RichEmbed()
     .setColor(3447003)
     .setTitle("Server Icon")
@@ -295,7 +290,7 @@ client.on('message', message => {
 }});
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!members")) {
+  if (message.content.startsWith("-members")) {
   let mem = "[**"
   mem += message.guild.memberCount
   mem += "**] Total Members"
@@ -315,7 +310,7 @@ function clean(text) {
 }
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!eval")) {
+  if (message.content.startsWith("-eval")) {
     if (message.author.id !== "207323008526843904") return;
     try {
       let a = message.content.split(" ")
@@ -333,7 +328,7 @@ client.on('message', message => {
 }})
 
 client.on('message', message => {
-  if (message.content === "!?!restart") {
+  if (message.content === "-restart") {
     if (message.author.id !== "207323008526843904") {
       message.channel.send("Not enough authorization.")
     } else {
@@ -345,7 +340,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-  if (message.content.startsWith("!?!owner")) {
+  if (message.content.startsWith("-owner")) {
   var owner = "Your king/queen is: "
   owner += "<@"
   owner += message.guild.ownerID
@@ -362,7 +357,7 @@ client.on('message', message => {
   // we ignore it
   if (!message.guild) return;
 
-  if (message.content.startsWith('m!?!play')) {
+  if (message.content.startsWith('m-play')) {
     let a = message.content.split(" ")
     let b = a[1]
     let c = a[2]
@@ -408,7 +403,7 @@ client.on('message', message => {
   // we ignore it
   if (!message.guild) return;
 
-  if (message.content === 'm!?!stop') {
+  if (message.content === 'm-stop') {
     // Only try to join the sender's voice channel if they are in one themselves
     if (message.member.voiceChannel) {
       message.member.voiceChannel.leave()
