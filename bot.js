@@ -159,7 +159,7 @@ client.on('message', message => {
 client.on('message', message => {
   if (message.content.startsWith("-botinfo")) {
     const embed = new discord.RichEmbed()
-    .setTitle("Server Info:")
+    .setTitle("Bot Info:")
     .setColor(3447003)
     .addField(":crown: Bot Creator", "Nemo#4298")
 	.addField(":envelope_with_arrow: Add me", "https://discordapp.com/api/oauth2/authorize?client_id=459885159856996353&permissions=8&scope=bot")
@@ -170,7 +170,10 @@ client.on('message', message => {
 client.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'general');
   if (!channel) return;
-  channel.send(`Well look who it is! It's ${member}!`);
+  const embed = new discord.RichEmbed()
+  .setTitle('**NEW MEMBER!**')
+  .addField("Well look who it is!",`It's ${member}!`)
+  channel.send({embed});
 });
 
 
