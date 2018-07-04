@@ -49,9 +49,14 @@ randomm = [
 ]
 
 roasts = [
-  "your fat",
+  "you're fat",
   "Move out of your mom's basement...",
-  "we don't have enough roasts!"
+  "we don't have enough roasts!",
+  "you spend your life here? of all things",
+  "you're the one interacting with a bot, anon.",
+  "why are you in this trash hole",
+  "look at your profile picture, *HEEZE* i can't hold it in HAHHAAHAHA",
+  ""
 ]
 
 client.on('message', message => {
@@ -227,8 +232,13 @@ client.on('message', message => {
       let a = message.content.split(" ")
       let b = a.slice(1)
       let members = b.join(" ")
+	  
       message.delete()
+      if (~members.indexOf("@everyone") == -1) {
       message.channel.send(members)
+      } else {
+        message.channel.send('You cannot mention everyone!')
+      }
     }});
 
     client.on('message', message => {
@@ -303,7 +313,7 @@ client.on('message', message => {
     description: mem
   }})
 }});
-  
+
 
 function clean(text) {
   if (typeof(text) === "string")
