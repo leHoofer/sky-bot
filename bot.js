@@ -234,6 +234,7 @@ client.on('message', message => {
       let members = b.join(" ")
 	  
       message.delete()
+      console.log(members.indexOf("@everyone"))
       if (~members.indexOf("@everyone") == -1) {
       message.channel.send(members)
       } else {
