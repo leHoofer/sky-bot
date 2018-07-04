@@ -261,6 +261,7 @@ client.on('message', message => {
 
   client.on('message', message => {
     if (message.content.startsWith("-purge") ) {
+      if (message.author.hasPermission('ADMINISTRATOR')){
       message.delete();
       var bbb = message.content.split(" ")
       var ammount = bbb[1]
@@ -270,12 +271,18 @@ message.channel.fetchMessages({limit: messagecount}).then(messages => message.ch
       .setColor(3447003)
       .setTitle("Messages Purged.")
       .setDescription("Deleted: " + ammount + " Messages.")
-    message.channel.send({embed})
-    sleep(10000)
-  }else { 
-  if (message.content.startsWith("-prune")) { 
-    message.channel.send("Incorrect Syntax, Use -purge [#]") }
-  }
+    message.channel.send({embed}).then(msg => {
+      sleep(10000)
+      msg.delete()
+    }
+  )
+} else {
+  const embed2 = new discord.RichEmbed()
+  .setTitle("Error!")
+  .setDescription("You do not have the required perms do use this action. REQUIRED: **[ADMINISTRATOR]**")
+  message.channel.send({embed2})
+}
+}
   });
 
 client.on('message', message => {
