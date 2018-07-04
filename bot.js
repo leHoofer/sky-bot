@@ -304,6 +304,13 @@ client.on('message', message => {
 }});
 
 client.on('message', message => {
+  if (message.content.startsWith("-hi")) {
+  if (message.guild.id === 447988213114732545) {
+    message.channel.send("hello fellow members am ur queen hail the queen")
+  }
+}});
+
+client.on('message', message => {
   if (message.content.startsWith("-members")) {
   let mem = "[**"
   mem += message.guild.memberCount
@@ -423,6 +430,7 @@ client.on('message', message => {
       message.member.voiceChannel.leave()
           message.reply('I have successfully left the the channel!');
 }}});
+
 
 
 //client.guilds.get("449702205876994049").memberCount)
