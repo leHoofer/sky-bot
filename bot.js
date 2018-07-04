@@ -261,7 +261,7 @@ client.on('message', message => {
 
   client.on('message', message => {
     if (message.content.startsWith("-purge") ) {
-      if (message.author.hasPermission('ADMINISTRATOR')){
+      if (message.member.hasPermission('ADMINISTRATOR')){
       message.delete();
       var bbb = message.content.split(" ")
       var ammount = bbb[1]
