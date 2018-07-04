@@ -278,6 +278,7 @@ message.channel.fetchMessages({limit: messagecount}).then(messages => message.ch
 } else {
   const ambed = new discord.RichEmbed()
   .setTitle("Error!")
+  .setColor(3447003)
   .setDescription("You do not have the required perms do use this action. REQUIRED: **[ADMINISTRATOR]**")
   message.channel.send({ambed})
 }
