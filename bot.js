@@ -236,7 +236,11 @@ client.on('message', message => {
       message.delete()
       console.log(members.indexOf("@everyone"))
       if (members.indexOf("@everyone") == -1) {
+        if (members.indexOf("@here") == -1) {
       message.channel.send(members)
+        } else {
+          message.channel.send('You cannot mention everyone!')
+        }
       } else {
         message.channel.send('You cannot mention everyone!')
       }
