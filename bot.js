@@ -262,7 +262,6 @@ client.on('message', message => {
   client.on('message', message => {
     if (message.content.startsWith("-purge") ) {
       if (message.member.hasPermission('ADMINISTRATOR')){
-      message.delete();
       var bbb = message.content.split(" ")
       var ammount = bbb[1]
       let messagecount = parseInt(ammount);
@@ -277,10 +276,10 @@ message.channel.fetchMessages({limit: messagecount}).then(messages => message.ch
     }
   )
 } else {
-  const embed2 = new discord.RichEmbed()
+  const ambed = new discord.RichEmbed()
   .setTitle("Error!")
   .setDescription("You do not have the required perms do use this action. REQUIRED: **[ADMINISTRATOR]**")
-  message.channel.send({embed2})
+  message.channel.send({ambed})
 }
 }
   });
