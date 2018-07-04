@@ -305,7 +305,7 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content.startsWith("-hi")) {
-  if (message.guild.id === 447988213114732545) {
+  if (message.guild.id == "447988213114732545") {
     message.channel.send("hello fellow members am ur queen hail the queen")
   }
 }});
