@@ -259,31 +259,6 @@ client.on('message', message => {
         message.channel.send({embed})
       }});
 
-  client.on('message', message => {
-    if (message.content.startsWith("-purge") ) {
-      if (message.member.hasPermission('ADMINISTRATOR')){
-      var bbb = message.content.split(" ")
-      var ammount = bbb[1]
-      let messagecount = parseInt(ammount);
-message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-      const embed = new discord.RichEmbed()
-      .setColor(3447003)
-      .setTitle("Messages Purged.")
-      .setDescription("Deleted: " + ammount + " Messages.")
-    message.channel.send({embed}).then(msg => {
-      sleep(10000)
-      msg.delete()
-    }
-  )
-} else {
-  const ambed = new discord.RichEmbed()
-  .setTitle("Error!")
-  .setColor(3447003)
-  .setDescription("You do not have the required perms do use this action. REQUIRED: **[ADMINISTRATOR]**")
-  message.channel.send({ambed})
-}
-}
-  });
 
 client.on('message', message => {
   if (message.content.startsWith("<@459885159856996353> prefix")) {
