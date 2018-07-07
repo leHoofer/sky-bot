@@ -55,8 +55,18 @@ roasts = [
   "you spend your life here? of all things",
   "you're the one interacting with a bot, anon.",
   "why are you in this trash hole",
-  "look at your profile picture, *HEEZE* i can't hold it in HAHHAAHAHA",
-  ""
+  "look at your profile picture, *HEEZE* i can't hold it in HAHHAAHAHA"
+]
+
+ball = [
+  ":8ball: Yes",
+  ":8ball: No",
+  ":8ball: Maybe",
+  ":8ball: Ask me again.",
+  ":8ball: Unable to determin.",
+  ":8ball: Soon.",
+  ":8ball: Possibly.",
+  ":8ball: Most Certainly."
 ]
 
 client.on('message', message => {
@@ -66,10 +76,10 @@ client.on('message', message => {
     .setColor(3447003)
     .addField("Prefix:", "-")
     .addField("Music Prefix:", "m-")
-    .addField(":bookmark: Basic Commands :bookmark:", "-botinfo | Get info about the bot\n-purge [#] | Deletes # messages.\n-region | Gives Server Region.\n-servericon | Gives you the server icon image.\n-members | Gives the ammount of members including bots.\n-owner | Gives the owner tag. (HAIL THE QUEEN!)\n-say [Message] | Says said message and deletes yours.\n-ping | Get the bots ping.")
+    .addField(":bookmark: Basic Commands :bookmark:", "-botinfo | Get info about the bot\n-servericon | Gives you the server icon image.\n-members | Gives the ammount of members including bots.\n-owner | Gives the owner tag. (HAIL THE QUEEN!)\n-say [Message] | Says said message and deletes yours.\n-ping | Get the bots ping.")
     .addField(":tada: Fun Commands :tada:", "-createemoji [url] [emoji-name] | Creates an emoji for your server\n-quote | Gives you a famous quote.\n-joke | Tells you a funny joke.\n-roast | Roasts you hardcore.\n-inftyping | Annoy the heck out of someone.")
     .addField(":musical_note: Music Commands :musical_note:", "m-play [Youtube URL] [volume] | Plays audio in voice channels.\nm-stop | Stops the music.")
-    .addField(":game_die: Miscellaneous :game_die:", "-dreamlog [paragraph] | Log all of your dreams in a new way.")
+    .addField(":game_die: Miscellaneous :game_die:", "-dreamlog [paragraph] | Log all of your dreams in a new way.\n-8ball [Question] | Get your fortune..")
   message.channel.send({embed})
 }});
 
@@ -102,6 +112,14 @@ client.on('message', message => {
     message.channel.send(rand)
   }
 })
+
+client.on('message', message => {
+  if(message.content.startsWith("-8ball")) {
+    var rand = ball[Math.floor(Math.random() * ball.length)];
+    message.channel.send(rand)
+  }
+})
+
 
 client.on('message', message => {
   if(message.content == "-giveaway") {
