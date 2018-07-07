@@ -59,12 +59,11 @@ roasts = [
 ]
 
 ball = [
-  ":8ball: Yes",
-  ":8ball: No",
-  ":8ball: Maybe",
+  ":8ball: Yes.",
+  ":8ball: No.",
+  ":8ball: Maybe.",
   ":8ball: Ask me again.",
   ":8ball: Unable to determin.",
-  ":8ball: Soon.",
   ":8ball: Possibly.",
   ":8ball: Most Certainly."
 ]
@@ -121,6 +120,7 @@ client.on('message', message => {
 })
 
 
+
 client.on('message', message => {
   if(message.content == "-giveaway") {
     message.channel.send("React with :confetti_ball: to enter\nEnding in 15 seconds").then((msg)=>{
@@ -163,7 +163,16 @@ client.on('message', message => {
   }
 })
 
-
+client.on('message', message => {
+  if (message.content.startsWith("-call")) {
+    let a = message.content.split(" ")
+    let b = a.slice(1)
+    let c = a.slice(2)
+    let msg = c.join(" ")
+  
+    message.channel.send(`**${message.guild.id}** | **${message.guild.author.username}** | ${msg}`)
+    
+  }});
 
 client.on('message', message => {
   if (message.content.startsWith("-serverinfo")) {
