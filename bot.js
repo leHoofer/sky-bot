@@ -170,7 +170,7 @@ client.on('message', message => {
     let c = a.slice(2)
     let msg = c.join(" ")
   
-    message.channel.send(`**${message.guild.id}** | **${message.guild.author.username}** | ${msg}`)
+    message.channel.send(`**${message.guild.id}** | **${message.guild.author}** | ${msg}`)
     
   }});
 
