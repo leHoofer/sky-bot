@@ -166,10 +166,9 @@ client.on('message', message => {
 client.on('message', message => {
   if (message.content.startsWith("-call")) {
     let a = message.content.split(" ")
-    let b = a.slice(1)
+    let b = a[1]
     let c = a.slice(2)
     let msg = c.join(" ")
-    console.log(b)
     console.log(c)
     if (client.guilds.get(c) === undefined) {
       message.channel.send("Phone Number not Found.")
