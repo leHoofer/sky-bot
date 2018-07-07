@@ -169,7 +169,7 @@ client.on('message', message => {
     let b = a[1]
     let c = a.slice(2)
     let msg = c.join(" ")
-    console.log(c)
+    console.log(b)
     if (client.guilds.get(c) === undefined) {
       message.channel.send("Phone Number not Found.")
     } else {
