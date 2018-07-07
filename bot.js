@@ -170,7 +170,15 @@ client.on('message', message => {
     let c = a.slice(2)
     let msg = c.join(" ")
   
-    message.channel.send(`**${message.guild.id}** | **${message.guild.author}** | ${msg}`)
+    if (client.guilds.get(c) === undefined) {
+      message.channel.send("Phone Number not Found.")
+    } else {
+      message.channel.send(`**${message.guild.id}** | **${message.guild.author}** | ${msg}`)
+      client.guilds.get(c).channels.find("username", "general").send(`**${message.guild.id}** | **${message.guild.author}** | ${msg}`)
+    }
+
+
+    
     
   }});
 
