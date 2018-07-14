@@ -255,8 +255,8 @@ client.on('message', message => {
         let a = message.content.split(" ")
         let b = a[1]
         let c = a[2]
-        var person = message.mentions.users[1];
-        console.log(message.mentions.users[1]);
+        var person = message.mentions.users.first();
+        console.log(message.mentions.users.first());
         var bal = 0;
         economy.fetchBalance(person.id).then((i) => {
           bal = i.money;
@@ -272,7 +272,7 @@ client.on('message', message => {
         let a = message.content.split(" ")
         let b = a[1]
         let c = a[2]
-        var person = message.mentions.users[1];
+        var person = message.mentions.users.first();
         var bal = 0;
         economy.fetchBalance(message.author.id).then((i) => {
           bal = i.money;
