@@ -35,6 +35,7 @@ randomm = [
 "hi there",
 "im bill.",
 "call me chuck",
+"my name is jeff",
 "nemo made me",
 "just keep swimming",
 "only you can prevent wild fires.",
