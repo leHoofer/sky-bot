@@ -223,6 +223,7 @@ client.on('guildMemberAdd', member => {
 
 client.on('message', message => {
   if (message.content.startsWith("-createemoji")) {
+    if(message.author.bot) return;
     let a = message.content.split(" ")
     let b = a[1]
     let c = a[2]
@@ -242,20 +243,96 @@ client.on('message', message => {
         money = i.money;
       });
       const embed = new discord.RichEmbed()
-      .setTitle(`**${message.author.username}'s Balance**`)
-      .addField(`${money} Skybucks`)
+      .addField(`**${message.author.username}'s Balance**`,`${money} Skybucks`)
       .setColor(3447003)
       message.channel.send({embed});
       return;
     }});
 
     client.on('message', message => {
+      if (message.content.startsWith("-setmoney")) {
+        if(message.author.bot) return;
+        let a = message.content.split(" ")
+        let b = a[1]
+        let c = a[2]
+        var person = message.mentions[0];
+        var bal = 0;
+        economy.fetchBalance(person.id).then((i) => {
+          bal = i.money;
+          economy.updateBalance(person.id, c - bal).then((i) => {
+            message.channel.send(`**Set Cash To ${c}**`)
+          });
+      });
+    }});
+    
+    client.on('message', message => {
       if (message.content.startsWith("-pay")) {
         if(message.author.bot) return;
         let a = message.content.split(" ")
         let b = a[1]
         let c = a[2]
+        var person = message.mentions[0];
+        var bal = 0;
+        economy.fetchBalance(message.author.id).then((i) => {
+          bal = i.money;
+      });
+
+
+
+
+
+
+
+
+        if (person === undefined) {
+          const embed = new discord.RichEmbed()
+          .addField(`HEY!`, `That's the invalid sytax, are you in the right mood?`)
+          .setColor(3447003)
+          message.channel.send({embed});
+          return;
+        }
+
+
+
+
+
+
+
+
+
+
+        if (person.id === message.author.id) {
+          const embed = new discord.RichEmbed()
+          .addField(`HEY!`, `You cannot send money to yourself, are you in the right mood?`)
+          .setColor(3447003)
+          message.channel.send({embed});
+          return;
+        } else {
+        if (c <= 0) {
+          const embed = new discord.RichEmbed()
+          .addField(`HEY!`, `You cannot send money less than 0, are you in the right mood?`)
+          .setColor(3447003)
+          message.channel.send({embed}); 
+          return;
+        } else {
+
+
+          if(bal < c) {
+            const embed = new discord.RichEmbed()
+            .addField(`HEY!`, `You do not have enough money!`)
+            .setColor(3447003)
+            message.channel.send({embed}); 
+            return;
+          } else {
+            economy.updateBalance(person.id, c).then((i) => {
+              economy.updateBalance(message.author.id, -Math.abs(c)).then((i) => {
+                
+              });
+            });
+          }
+        }
         
+        }
       }});
 
   client.on('message', message => {
