@@ -256,7 +256,7 @@ client.on('message', message => {
         let b = a[1]
         let c = a[2]
         var person = message.mentions.users[0];
-        console.log(message.mentions.users[0]);
+        console.log(message.mentions.users);
         var bal = 0;
         economy.fetchBalance(person.id).then((i) => {
           bal = i.money;
