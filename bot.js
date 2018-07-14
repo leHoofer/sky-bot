@@ -261,6 +261,7 @@ client.on('message', message => {
           bal = i.money;
           set = c - bal;
           console.log(set);
+          console.log(person.id)
           economy.updateBalance(person.id, set).then((i) => {
             message.channel.send(`**Set Cash To ${c}**`)
           });
