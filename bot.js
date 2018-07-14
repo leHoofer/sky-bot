@@ -237,15 +237,16 @@ client.on('message', message => {
   client.on('message', message => {
     if (message.content.startsWith("-bal")) {
       if(message.author.bot) return;
+      var money = 0;
       economy.fetchBalance(message.author.id).then((i) => {
-        var money = i.money;
+        money = i.money;
       });
       const embed = new discord.RichEmbed()
       .setTitle(`**${message.author.username}'s Balance**`)
       .addField(`${money} Skybucks`)
       .setColor(3447003)
       message.channel.send({embed});
-      
+      return;
     }});
 
     client.on('message', message => {
