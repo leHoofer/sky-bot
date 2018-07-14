@@ -256,11 +256,12 @@ client.on('message', message => {
         let b = a[1]
         let c = a[2]
         var person = message.mentions.users.first();
-        console.log(message.mentions.users.first());
         var bal = 0;
         economy.fetchBalance(person.id).then((i) => {
           bal = i.money;
-          economy.updateBalance(person.id, c - bal).then((i) => {
+          set = c - bal;
+          console.log(set);
+          economy.updateBalance(person.id, set).then((i) => {
             message.channel.send(`**Set Cash To ${c}**`)
           });
       });
