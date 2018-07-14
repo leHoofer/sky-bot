@@ -4,7 +4,7 @@ const client = new discord.Client();
 var sleep = require('system-sleep');
 var request = require('request');
 var ytdl = require('ytdl-core');
-
+var economy = require('discord-eco');
 client.on('ready', () => {
   client.user.setActivity(`-help | ${client.guilds.size} servers.`)
 })
@@ -81,6 +81,7 @@ client.on('message', message => {
     .addField(":game_die: Miscellaneous :game_die:", "-dreamlog [paragraph] | Log all of your dreams in a new way.\n-8ball [Question] | Get your fortune..")
     .addField(":moneybag: Economy :moneybag:", "-bal | Check your balance\n-pay [mention] [amount] | Pay someone.\n-setmoney [mention] [amount] | Admin only command.")
   message.channel.send({embed})
+  return;
 }});
 
 
@@ -233,15 +234,28 @@ client.on('message', message => {
     }
   }});
 
+  client.on('message', message => {
+    if (message.content.startsWith("-bal")) {
+      if(message.author.bot) return;
+      economy.fetchBalance(message.author.id).then((i) => {
+        var money = i.money;
+      });
+      const embed = new discord.RichEmbed()
+      .setTitle(`**${message.author.username}'s Balance**`)
+      .addField(`${money} Skybucks`)
+      .setColor(3447003)
+      message.channel.send({embed});
+      
+    }});
 
-
-client.on('message', message => {
-  if (message.content.startsWith("-region")) {
-    let a = message.content.split(" ")
-    let b = a[1]
-    let members = message.guild.fetchMember(b)
-    message.channel.send(members)
-  }});
+    client.on('message', message => {
+      if (message.content.startsWith("-pay")) {
+        if(message.author.bot) return;
+        let a = message.content.split(" ")
+        let b = a[1]
+        let c = a[2]
+        
+      }});
 
   client.on('message', message => {
     if (message.content.startsWith("-status")) {
