@@ -79,6 +79,7 @@ client.on('message', message => {
     .addField(":tada: Fun Commands :tada:", "-createemoji [url] [emoji-name] | Creates an emoji for your server\n-quote | Gives you a famous quote.\n-joke | Tells you a funny joke.\n-roast | Roasts you hardcore.\n-inftyping | Annoy the heck out of someone.")
     .addField(":musical_note: Music Commands :musical_note:", "m-play [Youtube URL] [volume] | Plays audio in voice channels.\nm-stop | Stops the music.")
     .addField(":game_die: Miscellaneous :game_die:", "-dreamlog [paragraph] | Log all of your dreams in a new way.\n-8ball [Question] | Get your fortune..")
+    .addField(":moneybag: Economy :moneybag:", "-bal | Check your balance\n-pay [mention] [amount] | Pay someone.\n-setmoney [mention] [amount] | Admin only command.")
   message.channel.send({embed})
 }});
 
@@ -204,7 +205,7 @@ client.on('message', message => {
     .setColor(3447003)
     .addField(":crown: Bot Creator", "Nemo#4298")
 	.addField(":envelope_with_arrow: Add me", "https://discordapp.com/api/oauth2/authorize?client_id=459885159856996353&permissions=8&scope=bot")
-	.addField(":desktop: Version", "1.2.4")
+	.addField(":desktop: Version", "1.3.0")
   message.channel.send({embed})
 }});
 
@@ -265,6 +266,7 @@ client.on('message', message => {
 
   client.on('message', message => {
     if (message.content.startsWith("-say")) {
+      if(message.author.bot) return;
       let a = message.content.split(" ")
       let b = a.slice(1)
       let members = b.join(" ")
