@@ -31,9 +31,8 @@ client.on('message', message =>{
         
     }
     if (msg.startsWith(prefix + "addmoney")) {
-        if (message.author.bot) {return}
-        console.log(message.member.displayName)
-        if (member.hasPermission('MANAGE_CHANNELS')) { 
+        if (message.author.bot) {return};
+        if (message.member.hasPermission("MANAGE_CHANNELS")) { 
         console.log("okay setting master")
         a = msg.split(" ")
         b = parseInt(a[1])
