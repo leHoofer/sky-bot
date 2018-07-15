@@ -4,7 +4,7 @@ const fs = require('fs');
 const request = require('request');
 let json = request.get("http://www.robloxdataa.tk/skybot/userdata.json")
 console.log(json)
-let userData = JSON.parse(json);
+let userData = JSON.parse(JSON.stringify(json));
 
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
