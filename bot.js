@@ -23,7 +23,6 @@ client.on('message', message =>{
         if (message.author.bot) {return;}
         message.channel.send('SkyBot is being rewritten from the ground up, stay tuned.')
     }
-msg.member.hasPermission('KICK_MEMBERS')
     if (msg === prefix + "bal" || msg === prefix + 'balance') {
         if (message.author.bot) {return;}
         money.fetchBal(message.author.id).then((i) => { 
@@ -33,7 +32,7 @@ msg.member.hasPermission('KICK_MEMBERS')
     }
     if (msg === prefix + "addmoney" || msg === prefix + 'addcash') {
         if (message.author.bot) {return}
-        if (msg.author.hasPermission('ADMINISTRATOR')) {return}
+        if (msg.member.hasPermission('ADMINISTRATOR')) {return}
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
