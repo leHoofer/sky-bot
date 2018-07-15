@@ -30,7 +30,7 @@ client.on('message', message =>{
     })
         
     }
-    if (msg === prefix + "addmoney" || msg === prefix + 'addcash') {
+    if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return}
         if (msg.author.hasPermission('MANAGE_CHANNELS')) { 
         console.log("okay setting master")
