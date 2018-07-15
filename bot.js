@@ -6,6 +6,8 @@ const get = require('simple-get')
 request("http://www.robloxdataa.tk/skybot/userdata.json", { json: true }, (err, res, body) => {
   if (err) { return console.log(err); }
   let userData = body;
+  console.log(userData);
+  console.log(body);
 });
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
