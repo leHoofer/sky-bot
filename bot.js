@@ -2,9 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
-let json = request("http://www.robloxdataa.tk/skybot/userdata.json")
-let userData = JSON.parse(JSON.stringify(json));
-console.log(json);
+let userData = request.get("http://www.robloxdataa.tk/skybot/userdata.json")
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
   })
