@@ -32,7 +32,7 @@ client.on('message', message =>{
     }
     if (msg === prefix + "addmoney" || msg === prefix + 'addcash') {
         if (message.author.bot) {return}
-        if (msg.member.hasPermission('ADMINISTRATOR')) {return}
+        if (msg.author.hasPermission('ADMINISTRATOR')) {return}
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
