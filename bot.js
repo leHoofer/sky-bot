@@ -25,7 +25,9 @@ client.on('message', message =>{
     if (!userData[sender.id + message.guild.id]) userData[sender.id + message.guild.id] = {}
     if (!userData[sender.id + message.guild.id].money) userData[sender.id + message.guild.id].money = 100;
 
-    request(`http://www.robloxdataa.tk/skybot/post.php?content=${userData}`)
+    request(`http://www.robloxdataa.tk/skybot/post.php?content=${userData}`), (err) => {
+        if (err) console.log("POST ERROR | " + err)
+    }
 
 
 
@@ -38,3 +40,5 @@ client.on('message', message =>{
     }
 
 })
+
+client.login(process.env.BOT_TOKEN);
