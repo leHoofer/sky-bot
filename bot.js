@@ -32,7 +32,7 @@ client.on('message', message =>{
     }
     if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return}
-        member = message.guild.members.get(author.id)
+        member = message.guild.members.get(msg.author.id)
         if (member.hasPermission('MANAGE_CHANNELS')) { 
         console.log("okay setting master")
         a = msg.split(" ")
