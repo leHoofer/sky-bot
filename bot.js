@@ -2,13 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
-const get = require('simple-get')
-let userData = undefined;
-request("http://www.robloxdataa.tk/skybot/userdata.json", { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  let userData = body;
-  console.log(body);
-});
+const money = require('discord-money');
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
   })
@@ -22,12 +16,6 @@ client.on('message', message =>{
 
 
 
-    if (!userData[sender.id + message.guild.id]) userData[sender.id + message.guild.id] = {}
-    if (!userData[sender.id + message.guild.id].money) userData[sender.id + message.guild.id].money = 100;
-
-    request(`http://www.robloxdataa.tk/skybot/post.php?content=${userData}`), (err) => {
-        if (err) console.log("POST ERROR | " + err)
-    }
 
 
 
@@ -36,7 +24,16 @@ client.on('message', message =>{
     }
 
     if (msg === prefix + "bal" || msg === prefix + 'balance') {
-        message.channel.send(`${sender.username}'s Balance: ${userData[sender.id + message.guild.id].money}`)
+        var bal = "Error"
+        money.fetchBal(message.author.id).then((i) => {bal = i.money});
+        message.channel.send(`${sender.username}'s Balance: ${bal}`)
+    }
+
+    if (msg === prefix + "testupd" || msg === prefix + 'tu') {
+        money.updateBal(message.author.id,500);
+        var bal = "Error"
+        money.fetchBal(message.author.id).then((i) => {bal = i.money});
+        message.channel.send(`${sender.username}'s New Balance: ${bal}`)
     }
 
 })
