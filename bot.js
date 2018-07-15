@@ -32,7 +32,8 @@ client.on('message', message =>{
     }
     if (msg === prefix + "addmoney" || msg === prefix + 'addcash') {
         if (message.author.bot) {return}
-        if (msg.author.hasPermission('MANAGE_CHANNELS')) { } else { return} ;
+        if (msg.author.hasPermission('MANAGE_CHANNELS')) { 
+        console.log("okay setting master")
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
@@ -43,6 +44,11 @@ client.on('message', message =>{
                 message.channel.send(`${sender.username}'s New Balance: ${i.money} Skybucks`)
             })
         })
+        } else {
+        message.channel.send("You sir, have no permissions!")
+        return
+        }
+
 
     }
 
