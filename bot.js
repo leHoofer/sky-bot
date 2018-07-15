@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
-
-let userData = JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
+const request = require('request');
+let userData = JSON.parse(request.get("http://www.robloxdataa.tk/skybot/userdata.json"));
 
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
@@ -17,13 +17,12 @@ client.on('message', message =>{
 
 
 
-
     if (!userData[sender.id + message.guild.id]) userData[sender.id + message.guild.id] = {}
     if (!userData[sender.id + message.guild.id].money) userData[sender.id + message.guild.id].money = 100;
 
-    fs.writeFile('userdata.json', JSON.stringify(userData), (err) => {
-        if (err) console.log("FS ERROR | " + err)
-    })
+    request.get(`http://www.robloxdataa.tk/skybot/post.php?content=${JSON.stringify(userData)}`), (err) => {
+        if (err) console.log("POST ERROR | " + err)
+    }
 
 
 
