@@ -24,16 +24,16 @@ client.on('message', message =>{
     }
 
     if (msg === prefix + "bal" || msg === prefix + 'balance') {
-        var bal = "Error"
-        money.fetchBal(message.author.id).then((i) => {bal = i.money});
-        message.channel.send(`${sender.username}'s Balance: ${bal}`)
+        money.fetchBal(message.author.id).then((i) => { 
+        message.channel.send(`${sender.username}'s Balance: ${i.money}`)
+    })
+        
     }
-
     if (msg === prefix + "testupd" || msg === prefix + 'tu') {
         money.updateBal(message.author.id,500);
-        var bal = "Error"
-        money.fetchBal(message.author.id).then((i) => {bal = i.money});
-        message.channel.send(`${sender.username}'s New Balance: ${bal}`)
+        money.fetchBal(message.author.id).then((i) => { 
+            message.channel.send(`${sender.username}'s New Balance: ${i.money}`)
+        })
     }
 
 })
