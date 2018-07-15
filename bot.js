@@ -20,20 +20,31 @@ client.on('message', message =>{
 
 
     if (msg === prefix + 'help') {
+        if (message.author.bot) {return;}
         message.channel.send('SkyBot is being rewritten from the ground up, stay tuned.')
     }
-
+msg.member.hasPermission('KICK_MEMBERS')
     if (msg === prefix + "bal" || msg === prefix + 'balance') {
+        if (message.author.bot) {return;}
         money.fetchBal(message.author.id).then((i) => { 
-        message.channel.send(`${sender.username}'s Balance: ${i.money}`)
+        message.channel.send(`${sender.username}'s Balance: ${i.money} Skybucks`)
     })
         
     }
-    if (msg === prefix + "testupd" || msg === prefix + 'tu') {
-        money.updateBal(message.author.id,500);
-        money.fetchBal(message.author.id).then((i) => { 
-            message.channel.send(`${sender.username}'s New Balance: ${i.money}`)
+    if (msg === prefix + "addmoney" || msg === prefix + 'addcash') {
+        if (message.author.bot) {return}
+        if (msg.member.hasPermission('ADMINISTRATOR')) {return}
+        a = msg.split(" ")
+        b = parseInt(a[1])
+        if (b === undefined) {
+            message.channel.send("You did not enter a valid amount!")
+        }
+        money.updateBal(message.author.id,b).then((m) => {
+            money.fetchBal(message.author.id).then((i) => { 
+                message.channel.send(`${sender.username}'s New Balance: ${i.money} Skybucks`)
+            })
         })
+
     }
 
 })
