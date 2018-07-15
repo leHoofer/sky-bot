@@ -16,7 +16,23 @@ client.on('message', message =>{
 
 
 
-
+    client.on('message', message => {
+        if (message.content.startsWith(prefix + "eval")) {
+          if (message.author.id !== "207323008526843904") return;
+          try {
+            let a = message.content.split(" ")
+            let b = a.slice(1)
+            let code = b.join(" ")
+            var evaled = eval(code);
+      
+            if (typeof evaled !== "string")
+              evaled = require("util").inspect(evaled);
+      
+          
+          } catch(err) {
+            message.channel.send(`Error 404: ${clean(err)}`)
+          }
+      }})
 
 
     if (msg === prefix + 'help') {
