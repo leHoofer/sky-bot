@@ -47,6 +47,7 @@ client.on('message', message =>{
     }
     if (msg === prefix + "bal" || msg === prefix + 'balance') {
         if (message.author.bot) {return;}
+        if (message.guild === null) {return};
         money.fetchBal(message.author.id).then((i) => { 
         message.channel.send(`${sender.username}'s Balance: ${i.money} Skybucks`)
     })
@@ -54,8 +55,8 @@ client.on('message', message =>{
     }
     if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return};
+        if (message.guild === null) {return};
         if (message.member.hasPermission("MANAGE_CHANNELS")) { 
-        console.log("okay setting master")
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
