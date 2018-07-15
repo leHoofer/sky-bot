@@ -8,6 +8,13 @@ client.on('ready', () => {
   })
   
 
+  function clean(text) {
+    if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+        return text;
+  }
+
 client.on('message', message =>{
 
     let sender = message.author;
