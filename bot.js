@@ -111,8 +111,9 @@ if (msg.startsWith(prefix + "deposit")) {
     a = msg.split(" ")
     b = a[1]
     money.fetchBal(message.author.id).then((i) => { 
-        if (i >= b) {
+        if (parseInt(i) >= parseInt(b)) {
             money.updateBal("Bank-" + message.author.id,b)
+            money.updateBal(message.author.id, parseInt(b * -1))
         }
     })
 }
