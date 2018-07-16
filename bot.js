@@ -43,9 +43,9 @@ client.on('message', message =>{
 
     if (msg === prefix + 'help') {
         if (message.author.bot) {return;}
-        message.channel.send('SkyBot is being rewritten from the ground up, stay tuned.')
+        message.channel.send('-wallet | View how much cash u have on you\n-bank | View how much cash you have in the bank.\n-deposit [n] | Deposit [n] money to bank.\n-withdraw | Withdraw [n] money from bank.')
     }
-    if (msg === prefix + "bal" || msg === prefix + 'balance') {
+    if (msg === prefix + "wallet" || msg === prefix + 'wallet') {
         if (message.author.bot) {return;}
         if (message.guild === null) {return};
         money.fetchBal(message.author.id).then((i) => { 
@@ -56,7 +56,7 @@ client.on('message', message =>{
     if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return};
         if (message.guild === null) {return};
-        if (message.member.hasPermission("MANAGE_CHANNELS")) { 
+        if (message.author.id === 207323008526843904) {
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
@@ -68,7 +68,7 @@ client.on('message', message =>{
             })
         })
         } else {
-        message.channel.send("You sir, have no permissions!")
+        message.channel.send("This command is decapreated")
         return
         }
 
