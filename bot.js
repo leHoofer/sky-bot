@@ -96,7 +96,7 @@ client.on('message', message =>{
         }
         money.updateBal(person.id,b).then((m) => {
             money.fetchBal(person.id).then((i) => { 
-                message.channel.send(`${person.username}'s New Balance: ${i.money} Skybucks`)
+                message.channel.send(`${person.name}'s New Balance: ${i.money} Skybucks`)
             })
         })
         } else {
@@ -117,7 +117,7 @@ if (msg.startsWith(prefix + "deposit")) {
     a = msg.split(" ")
     b = a[1]
     money.fetchBal(message.author.id).then((i) => { 
-        if (parseInt(i) > parseInt(b)) {
+        if (i > b) {
             message.channel.send("**Making a deposit...**")
             money.updateBal("Bank-" + message.author.id,b)
             money.updateBal(message.author.id, parseInt(b + 1 * -1))
