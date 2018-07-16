@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
 const money = require('discord-money');
+const talkedRecently = new Set();
 client.on('ready', () => {
     client.user.setActivity(`IMPORTANT | -help`)
   })
@@ -149,6 +150,30 @@ if (msg.startsWith(prefix + "deposit")) {
             }
 
 
+            //*
+            //* WORK
+            //*
+
+            if (msg.content == prefix + "work") {
+                if (talkedRecently.has(message.author.id)) {
+                    message.channel.send("Wait 10 minute before getting typing this again. | " + message.author);
+            } else {
+
+                function getRandomInt (min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                    var earning = getRandomInt(4,20)
+                   message.channel.send(`You have worked and earned $${earning}`)
+                   money.updateBal(message.author.id, earning)
+                   message.channel.send("Money has been sent to your wallet.")
+        
+                talkedRecently.add(message.author.id);
+                setTimeout(() => {
+                  talkedRecently.delete(message.author.id);
+                }, 600000);
+            }
+            }
 
 
 
