@@ -83,14 +83,20 @@ client.on('message', message =>{
         if (message.author.bot) {return};
         if (message.guild === null) {return};
         if (message.author.id === "207323008526843904") {
+        var person = undefined;
+        if (message.mentions.members.first() === undefined) {
+        person = message.author
+        } else {
+            person = message.mentions.members.first()
+        }
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
             message.channel.send("You did not enter a valid amount!")
         }
-        money.updateBal(message.author.id,b).then((m) => {
-            money.fetchBal(message.author.id).then((i) => { 
-                message.channel.send(`${sender.username}'s New Balance: ${i.money} Skybucks`)
+        money.updateBal(person.id,b).then((m) => {
+            money.fetchBal(person.id).then((i) => { 
+                message.channel.send(`${person.username}'s New Balance: ${i.money} Skybucks`)
             })
         })
         } else {
