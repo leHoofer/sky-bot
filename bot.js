@@ -22,7 +22,9 @@ client.on('message', message =>{
     let prefix = '-'
 
 
-
+            //*
+            //* EVAL
+            //*
         if (message.content.startsWith("-eval")) {
           if (message.author.id !== "207323008526843904") return;
           try {
@@ -40,19 +42,43 @@ client.on('message', message =>{
           }
       }
 
+            //*
+            //* HELP
+            //*
 
     if (msg === prefix + 'help') {
         if (message.author.bot) {return;}
         message.channel.send('-wallet | View how much cash u have on you\n-bank | View how much cash you have in the bank.\n-deposit [n] | Deposit [n] money to bank.\n-withdraw | Withdraw [n] money from bank.')
     }
+
+            //*
+            //* WALLET
+            //*
+
     if (msg === prefix + "wallet" || msg === prefix + 'wallet') {
         if (message.author.bot) {return;}
         if (message.guild === null) {return};
         money.fetchBal(message.author.id).then((i) => { 
-        message.channel.send(`${sender.username}'s Balance: ${i.money} Skybucks`)
+        message.channel.send(`${sender.username}'s Wallet Balance: ${i.money} Skybucks`)
     })
-        
-    }
+}
+
+            //*
+            //* BANK
+            //*
+
+    if (msg === prefix + "bank" || msg === prefix + 'bank') {
+        if (message.author.bot) {return;}
+        if (message.guild === null) {return};
+        money.fetchBal("Bank-" + message.author.id).then((i) => { 
+        message.channel.send(`${sender.username}'s Bank Balance: ${i.money} Skybucks`)
+    })
+}
+
+            //*
+            //* ADD MONEY
+            //*
+
     if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return};
         if (message.guild === null) {return};
@@ -74,6 +100,35 @@ client.on('message', message =>{
 
 
     }
+
+
+
+            //*
+            //* DEPOSIT
+            //*
+
+if (msg.startsWith(prefix + "deposit")) {
+    a = msg.split(" ")
+    b = a[1]
+    money.fetchBal(message.author.id).then((i) => { 
+        if (i >= b) {
+            money.updateBal("Bank-" + message.author.id,b)
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 })
 
