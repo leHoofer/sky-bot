@@ -49,7 +49,7 @@ client.on('message', message =>{
 
     if (msg === prefix + 'help') {
         if (message.author.bot) {return;}
-        message.channel.send('-wallet | View how much cash u have on you\n-bank | View how much cash you have in the bank.\n-deposit [n] | Deposit [n] money to bank.\n-withdraw | Withdraw [n] money from bank.')
+        message.channel.send('-wallet | View how much cash u have on you\n-bank | View how much cash you have in the bank.\n-deposit [n] | Deposit [n] money to bank.\n-withdraw | Withdraw [n] money from bank.\n-work | Do some garbage job.')
     }
 
             //*
@@ -154,7 +154,7 @@ if (msg.startsWith(prefix + "deposit")) {
             //* WORK
             //*
 
-            if (msg.content == prefix + "work") {
+            if (msg.startsWith(prefix + "work")) {
                 if (talkedRecently.has(message.author.id)) {
                     message.channel.send("Wait 10 minute before getting typing this again. | " + message.author);
             } else {
