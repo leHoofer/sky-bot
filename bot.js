@@ -121,7 +121,7 @@ if (msg.startsWith(prefix + "deposit")) {
         if (i >= b) {
             message.channel.send("**Making a deposit...**")
             money.updateBal("Bank-" + message.author.id,b)
-            money.updateBal(message.author.id, b)
+            money.updateBal(message.author.id, b * -1)
             message.channel.send(`**Deposit made, have a nice day. You have put in $${b}**`)
         } else {
             message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b}.**`)
