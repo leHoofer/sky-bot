@@ -117,20 +117,38 @@ if (msg.startsWith(prefix + "deposit")) {
     a = msg.split(" ")
     b = a[1]
     money.fetchBal(message.author.id).then((i) => { 
-        if (i > b) {
+        if (i > b + Math.round(b / 0.062)) {
             message.channel.send("**Making a deposit...**")
             money.updateBal("Bank-" + message.author.id,b)
-            money.updateBal(message.author.id, parseInt(b + 1 * -1))
-            message.channel.send("**Taxes | $1**");
+            money.updateBal(message.author.id, parseInt(b + Math.round(b / 0.062) * -1))
+            message.channel.send(`**Taxes | $${Math.round(b / 0.062)}**`);
             message.channel.send("**Deposit made, have a nice day.**")
         } else {
-            message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b} + $1 Tax**`)
+            message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b} + $${Math.round(b / 0.062)} Tax**`)
         }
     })
 }
 
 
+            //*
+            //* WITHDRAW
+            //*
 
+            if (msg.startsWith(prefix + "withdraw")) {
+                a = msg.split(" ")
+                b = a[1]
+                money.fetchBal("Bank-" + message.author.id).then((i) => { 
+                    if (i >= b + Math.round(b / 0.062)) {
+                        message.channel.send("**Making a withdraw...**")
+                        money.updateBal("Bank-" + message.author.id, b * - 1)
+                        money.updateBal(message.author.id, parseInt(b + Math.round(b / 0.062)))
+                        message.channel.send(`**Taxes | ${Math.round(b / 0.062)}**`);
+                        message.channel.send("**Withdraw made, have a nice day.**")
+                    } else {
+                        message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b} + $${Math.round(b / 0.062)} Tax in your account.**`)
+                    }
+                })
+            }
 
 
 
