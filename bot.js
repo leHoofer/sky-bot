@@ -82,7 +82,7 @@ client.on('message', message =>{
     if (msg.startsWith(prefix + "addmoney")) {
         if (message.author.bot) {return};
         if (message.guild === null) {return};
-        if (message.author.id === 207323008526843904) {
+        if (message.author.id === "207323008526843904") {
         a = msg.split(" ")
         b = parseInt(a[1])
         if (b === undefined) {
