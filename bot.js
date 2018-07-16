@@ -117,13 +117,14 @@ if (msg.startsWith(prefix + "deposit")) {
     a = msg.split(" ")
     b = a[1]
     money.fetchBal(message.author.id).then((i) => { 
-        if (parseInt(i) >= parseInt(b)) {
+        if (parseInt(i) > parseInt(b)) {
             message.channel.send("**Making a deposit...**")
             money.updateBal("Bank-" + message.author.id,b)
-            money.updateBal(message.author.id, parseInt(b * -1))
+            money.updateBal(message.author.id, parseInt(b + 1 * -1))
+            message.channel.send("**Taxes | $1**");
             message.channel.send("**Deposit made, have a nice day.**")
         } else {
-            message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b}`)
+            message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b} + $1 Tax**`)
         }
     })
 }
