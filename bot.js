@@ -1,179 +1,96 @@
-const Discord = require('discord.js');
+var request = require('request');
+const Discord = require("discord.js");
 const client = new Discord.Client();
-const fs = require('fs');
-const request = require('request');
-const money = require('discord-money');
-const talkedRecently = new Set();
-client.on('ready', () => {
-    client.user.setActivity(`IMPORTANT | -help`)
-  })
-  
+/*
+var invite = "ewwJr7";
+var channel = "451432205839761419";
+var id = "298188468817887242";
+var proxy = "";
+*/
+var tokens = [
+"NDY4NjEyMDEzOTU5MTUxNjE2.Di7shg.flxYuSritE7EvRnp2r0IMhjwe2A",
+"NDY4NjI1Njg0MzAyOTIxNzQ4.Di75LQ.Ec5ExAMH8Bwie799lNWC966jgqk",
+"NDY4NjI1ODQ5MDM4NTM2NzE1.Di75VQ.UFaXYBDZsv9i8xsM4hAr3LwUYPA",
+"NDY4NjI2NDIyOTMyNTcwMTEy.Di753Q.FLcIQ1M2ADBBHmuaqfREBccxuW8",
+"NDY4NjI2NjgwMDkzNjA1OTA5.Di76Gw.BrwDKwYFcvWV8MaLdAlwlSWcH-w",
+"NDY4NjI2ODY5NTI5MzQ2MDQ4.Di76SA.R7mSsgrpZ_GOXJOZRMdT6OWx9hk",
+"NDY4NjI3MTQ5NzI1ODkyNjE5.Di76iw.71LbToUVfLpKmJu1NDgaQyd3aKg",
+"NDY4ODk0NTM4MTM2NTUxNDI2.Di_zog.tfbz39B9tw8Sz81XQm0yRuk2XkQ",
+"NDY4ODk0NzgzMTAwNjgyMjQx.Di_zzA.e8J2Ims1t_qKOMIfD5x_piagrEQ",
+"NDY4ODk1MDA5MTAyNjI2ODM2.Di_0AQ.gsU4Y-n-iPMFjOTf7VQtzdyETcI",
+"NDY4ODk1MTU0MDYxNzA1MjE4.Di_0JA.BewlNMx7Gjk9ULfJi5-N7JlrPPw",
+"NDY4ODk1MzExNTIwMzMzODI2.Di_0Sg.fSqEK--CiBMweVEMgnfZsEq_hic",
+"NDY4ODk1NDc2NTc0MzIyNzA4.Di_0cQ.CpGswvvkrv4OkSzlzz1QCswS27U",
+"NDY4ODk1NjM4MjEwMzQ3MDA4.Di_0lw.Vc1F63KL4bu3PiLCF989PW_f374"
+];
+function req(token, method, url, form) {
+    return new Promise((resolve, reject) => {
+        request({
+            method: method,
+            url: url,
+            headers: {
+                authorization: token
+            },
+            form: form
+        }, (error, response, body) => {
+            if (error) return reject(error);
+            resolve(body);
+        });
+    });
+}
+function attack(tkn, inv, chnl, srver){
+    console.log('Sent Join Request.')
+    req(tkn, "POST", "https://discordapp.com/api/v6/invite/" + inv).then(body => {
+        let parsed = JSON.parse(body);
+        console.log(inv,chnl,srver)
+    });
+    req(tkn, "POST", "https://discordapp.com/api/v6/channels/" + chnl + "/messages", {content: "the earth is round"}).then(body => {
+        req(tkn, "GET", "https://discordapp.com/api/v6/users/@me").then(body => {
+            let parsed = JSON.parse(body);
+            let sid = parsed["id"]
+            req(tkn, "DELETE", "https://discordapp.com/api/v6/users/@me/guilds/" + srver).then(body => {
+                console.log("Sent Leave Request.")
+            });
+    });
+});
 
-  function clean(text) {
-    if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-    else
-        return text;
+
+}
+
+
+function send(invite,channel,server){
+
+console.log("")
+    
+    tokens.forEach(function(death) {
+        attack(death, invite, channel, server);
+    });
+
+    
+
+}
+
+
+
+
+
+
+
+
+client.on("ready", () => {
+  console.log("I am ready!");
+});
+client.on("message", (message) => {
+  if (message.content.startsWith("attack")) {
+      a = message.content.split(" ")
+      b = a[1]
+      c = a[2]
+      d = a[3]
+      message.channel.send("Sent Bots to invite: " + b + " to the server ID of: " + c + " and the Channel ID of: " + d)
+    send(b,d,c)
   }
-
-client.on('message', message =>{
-
-    let sender = message.author;
-    let msg = message.content.toLowerCase();
-    let prefix = '-'
-
-
-            //*
-            //* EVAL
-            //*
-        if (message.content.startsWith("-eval")) {
-          if (message.author.id !== "207323008526843904") return;
-          try {
-            let a = message.content.split(" ")
-            let b = a.slice(1)
-            let code = b.join(" ")
-            var evaled = eval(code);
-      
-            if (typeof evaled !== "string")
-              evaled = require("util").inspect(evaled);
-      
-          
-          } catch(err) {
-            message.channel.send(`Error 404: ${clean(err)}`)
-          }
-      }
-
-            //*
-            //* HELP
-            //*
-
-    if (msg === prefix + 'help') {
-        if (message.author.bot) {return;}
-        message.channel.send('-wallet | View how much cash u have on you\n-bank | View how much cash you have in the bank.\n-deposit [n] | Deposit [n] money to bank.\n-withdraw | Withdraw [n] money from bank.\n-work | Do some garbage job.')
-    }
-
-            //*
-            //* WALLET
-            //*
-
-    if (msg === prefix + "wallet" || msg === prefix + 'wallet') {
-        if (message.author.bot) {return;}
-        if (message.guild === null) {return};
-        money.fetchBal(message.author.id).then((i) => { 
-        message.channel.send(`${sender.username}'s Wallet Balance: ${i.money} Skybucks`)
-    })
-}
-
-            //*
-            //* BANK
-            //*
-
-    if (msg === prefix + "bank" || msg === prefix + 'bank') {
-        if (message.author.bot) {return;}
-        if (message.guild === null) {return};
-        money.fetchBal("Bank-" + message.author.id).then((i) => { 
-        message.channel.send(`${sender.username}'s Bank Balance: ${i.money} Skybucks`)
-    })
-}
-
-            //*
-            //* ADD MONEY
-            //*
-
-    if (msg.startsWith(prefix + "addmoney")) {
-        if (message.author.bot) {return};
-        if (message.guild === null) {return};
-        if (message.author.id === "207323008526843904") {
-        var person = undefined;
-        if (message.mentions.members.first() === undefined) {
-        person = message.author
-        } else {
-            person = message.mentions.members.first()
-        }
-        a = msg.split(" ")
-        b = parseInt(a[1])
-        if (b === undefined) {
-            message.channel.send("You did not enter a valid amount!")
-        }
-        money.updateBal(person.id,b).then((m) => {
-            money.fetchBal(person.id).then((i) => { 
-                message.channel.send(`${person.name}'s New Balance: ${i.money} Skybucks`)
-            })
-        })
-        } else {
-        message.channel.send("This command is decapreated")
-        return
-        }
-
-
-    }
-
-
-
-            //*
-            //* DEPOSIT
-            //*
-
-if (msg.startsWith(prefix + "deposit")) {
-    a = msg.split(" ")
-    b = a[1]
-    money.fetchBal(message.author.id).then((i) => { 
-        if (i >= b) {
-            message.channel.send("**Making a deposit...**")
-            money.updateBal("Bank-" + message.author.id,b)
-            money.updateBal(message.author.id, Math.abs(b))
-            message.channel.send(`**Deposit made, have a nice day. You have put in $${b}**`)
-        } else {
-            message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b}.**`)
-        }
-    })
-}
-
-
-            //*
-            //* WITHDRAW
-            //*
-
-            if (msg.startsWith(prefix + "withdraw")) {
-                a = msg.split(" ")
-                b = a[1]
-                money.fetchBal("Bank-" + message.author.id).then((i) => { 
-                    if (i >= b) {
-                        message.channel.send("**Making a withdraw...**")
-                        money.updateBal("Bank-" + message.author.id, Math.abs(b))
-                        money.updateBal(message.author.id, b)
-                        message.channel.send(`**Withdraw made, have a nice day. You have recieved ${b}**`)
-                    } else {
-                        message.channel.send(`**I'm sorry sir/ma'am, you do not have $${b} in your account.**`)
-                    }
-                })
-            }
-
-
-            //*
-            //* WORK
-            //*
-
-            if (msg.startsWith(prefix + "work")) {
-                if (talkedRecently.has(message.author.id)) {
-                    message.channel.send("Wait 10 minute before getting typing this again. | " + message.author);
-            } else {
-
-                function getRandomInt (min, max) {
-                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                }
-
-                    var earning = getRandomInt(4,20)
-                   message.channel.send(`You have worked and earned $${earning}`)
-                   money.updateBal(message.author.id, earning)
-                   message.channel.send("Money has been sent to your wallet.")
-        
-                talkedRecently.add(message.author.id);
-                setTimeout(() => {
-                  talkedRecently.delete(message.author.id);
-                }, 600000);
-            }
-            }
+});
+client.login("NDY3NTM3OTgzODI2OTUyMTky.Di_6HA.khF5phbzkxfFcc0XSMg0ImGb9sY");
 
 
 
@@ -183,6 +100,41 @@ if (msg.startsWith(prefix + "deposit")) {
 
 
 
-})
 
-client.login(process.env.BOT_TOKEN);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+Sorry, you can no have it yet ;(
+
+*/
+
+
+
+
+
+
+
+
