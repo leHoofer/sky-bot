@@ -23,6 +23,22 @@ var tokens = [
 "NDY4ODk1NDc2NTc0MzIyNzA4.Di_0cQ.CpGswvvkrv4OkSzlzz1QCswS27U",
 "NDY4ODk1NjM4MjEwMzQ3MDA4.Di_0lw.Vc1F63KL4bu3PiLCF989PW_f374"
 ];
+function reqreset(eemail, method, url, form) {
+    return new Promise((resolve, reject) => {
+        request({
+            method: method,
+            url: url,
+            headers: {
+                email: eemail
+            },
+            form: form
+        }, (error, response, body) => {
+            if (error) return reject(error);
+            resolve(body);
+        });
+    });
+}
+
 function req(token, method, url, form) {
     return new Promise((resolve, reject) => {
         request({
@@ -80,6 +96,16 @@ console.log("")
 client.on("ready", () => {
   console.log("I am ready!");
 });
+
+client.on("message", (message) => {
+    if (message.content.startsWith("reset-acc")) {
+        a = message.content.split(" ")
+        b = a[1]
+        reqreset(b, "POST", "https://discordapp.com/api/v6/auth/forgot")
+    }
+})
+
+
 client.on("message", (message) => {
   if (message.content.startsWith("attack")) {
       a = message.content.split(" ")
