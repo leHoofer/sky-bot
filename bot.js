@@ -23,6 +23,8 @@ var tokens = [
 "NDY4ODk1NDc2NTc0MzIyNzA4.Di_0cQ.CpGswvvkrv4OkSzlzz1QCswS27U",
 "NDY4ODk1NjM4MjEwMzQ3MDA4.Di_0lw.Vc1F63KL4bu3PiLCF989PW_f374"
 ];
+
+
 function reqreset(eemail, method, url, form) {
     return new Promise((resolve, reject) => {
         request({
@@ -102,6 +104,7 @@ client.on("message", (message) => {
         a = message.content.split(" ")
         b = a[1]
         reqreset(b, "POST", "https://discordapp.com/api/v6/auth/forgot")
+        message.channel.send("Request sent to: " + b + "\nPlease check your email.")
     }
 })
 
