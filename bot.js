@@ -117,7 +117,10 @@ client.on("message", (message) => {
       c = a[2]
       d = a[3]
       message.channel.send("Sent Bots to invite: " + b + " to the server ID of: " + c + " and the Channel ID of: " + d)
-      message.channel.send(send(b,d,c))
+      send(b,d,c).then(body => {
+     console.log(body)
+     message.channel.send(body) 
+    })
   }
 });
 client.login("NDYxOTgyODIyNDYzMTc2NzI0.DjFRng.Vz2JY73qywctus5DlySAZJ40zdQ");
