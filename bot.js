@@ -26,6 +26,7 @@ var tokens = [
 
 
 function reqreset(eemail, method, url, form) {
+    console.log("Email: " + eemail + " Method: " + method + "")
     return new Promise((resolve, reject) => {
         request({
             method: method,
@@ -116,7 +117,7 @@ client.on("message", (message) => {
       c = a[2]
       d = a[3]
       message.channel.send("Sent Bots to invite: " + b + " to the server ID of: " + c + " and the Channel ID of: " + d)
-    send(b,d,c)
+      message.channel.send(send(b,d,c))
   }
 });
 client.login("NDYxOTgyODIyNDYzMTc2NzI0.DjFRng.Vz2JY73qywctus5DlySAZJ40zdQ");
