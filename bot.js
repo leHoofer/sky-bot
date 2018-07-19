@@ -90,7 +90,7 @@ client.on("message", (message) => {
     send(b,d,c)
   }
 });
-client.login("NDY3NTM3OTgzODI2OTUyMTky.Di_6HA.khF5phbzkxfFcc0XSMg0ImGb9sY");
+client.login("NDYxOTgyODIyNDYzMTc2NzI0.DjFRng.Vz2JY73qywctus5DlySAZJ40zdQ");
 
 
 
