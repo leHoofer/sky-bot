@@ -10,14 +10,6 @@ function wait(milleseconds) {
     return new Promise(resolve => setTimeout(resolve, milleseconds))
   }
 
-client.on("message", async function(message){
-
-if (message.content.startsWith("test")) {
-
-}
-
-
-});
 
 
 
