@@ -30,14 +30,15 @@ setInterval(() => {
 
     request("https://groups.rprxy.xyz/v1/groups/4511209", function (error, response, body) {
         body = JSON.parse(body)
-
-
+        console.log(lastShout)
+        console.log(body["shout"]["body"])
         if (lastShout == body["shout"]["body"]) {
         } else {
-        client.guilds.get('509104083681148939').channels.get('509868150276358155').send("@here " + body["shout"]["body"] + " | https://www.roblox.com/My/Groups.aspx?gid=4511209")
-        url = ("http://ro-api.000webhostapp.com/ro-api/setShout.php?contents="+body["shout"]["body"]);
+             url = ("http://ro-api.000webhostapp.com/ro-api/setShout.php?contents="+body["shout"]["body"]);
         request(url, function (error, response, body) {
         });
+        client.guilds.get('509104083681148939').channels.get('509868150276358155').send("@here " + body["shout"]["body"] + " | https://www.roblox.com/My/Groups.aspx?gid=4511209")
+
 
 
         }
