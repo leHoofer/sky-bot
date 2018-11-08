@@ -27,8 +27,13 @@ setInterval(() => {
         lastShout = body
         });
 
-
+    if (lastShout == undefined) {
+    console.log('Error 404 | Shout undefined')
+    } else {
     request("https://groups.rprxy.xyz/v1/groups/4511209", function (error, response, body) {
+        if (body == undefined) {
+            console.log('Error 404 | Proxy returned blank')
+        } else {
         body = JSON.parse(body)
         console.log(lastShout)
         console.log(body["shout"]["body"])
@@ -38,13 +43,11 @@ setInterval(() => {
         request(url, function (error, response, body) {
         });
         client.guilds.get('509104083681148939').channels.get('509868150276358155').send("@here " + body["shout"]["body"] + " | https://www.roblox.com/My/Groups.aspx?gid=4511209")
-
-
-
         }
+    }
         });
 
-
+    }
 
 
 }, 2000)
