@@ -6,6 +6,7 @@ var request = require('request');
 var lastImage = undefined
 //greyscale, invert, blur, flip
 
+
 client.on("message", message => {
 
   if (message.content.startsWith("ro.role")) {
@@ -16,7 +17,7 @@ client.on("message", message => {
     if (colorcode == undefined) {
       colorcode = '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
     } else {
-      if (colorcode == "36393F") {
+      if (colorcode == "#36393F") {
         colorcode = '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
       }
     }
