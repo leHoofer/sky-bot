@@ -6,14 +6,6 @@ var request = require('request');
 var lastImage = undefined
 //greyscale, invert, blur, flip
 
-function hashCode(str) {
-  var hash = 0;
-  for (var i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return hash;
-}
-
 client.on("message", message => {
 
   if (message.content.startsWith("ro.role")) {
@@ -23,6 +15,10 @@ client.on("message", message => {
     colorcode = msgs[1];
     if (colorcode == undefined) {
       colorcode = '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
+    } else {
+      if (colorcode == "36393F") {
+        colorcode = '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
+      }
     }
     hasrole = false
     message.guild.roles.forEach(m=> {
