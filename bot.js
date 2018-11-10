@@ -10,7 +10,6 @@ var lastImage = undefined
 client.on("message", message => {
 
   if (message.content.startsWith("ro.role")) {
-    if (message.channel.id == "510926604554338305") {
     message.delete()
     msgs = message.content.split(" ");
     colorcode = msgs[1];
@@ -49,7 +48,6 @@ client.on("message", message => {
       message.reply("Successfully set role color to: " + colorcode).then(bm=> {
         bm.delete(3000)
       })
-    }
   }
 
 
@@ -191,7 +189,7 @@ client.on("message", message => {
 
 });
 
-
+message.guild
 
 
 client.login(DISCORD_TOKEN);
