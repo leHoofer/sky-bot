@@ -39,7 +39,8 @@ client.on("message", message => {
       message.guild.createRole({
           name: message.author.username,
           mentionable: false,
-          color: colorcode
+          color: colorcode,
+          position: 255
       }).then(role => {
         message.member.addRole(role)
       })
