@@ -28,7 +28,8 @@ client.on("message", message => {
         m.edit({
           name: message.author.username,
           mentionable: false,
-          color: colorcode
+          color: colorcode,
+          position: 255
         })
       }
 
