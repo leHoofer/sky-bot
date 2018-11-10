@@ -189,7 +189,6 @@ client.on("message", message => {
 
 });
 
-message.guild
 
 
 client.login(DISCORD_TOKEN);
