@@ -1,56 +1,200 @@
+var Jimp = require('jimp');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var DISCORD_TOKEN = process.env.TOKEN;
 var request = require('request');
-var lastShout = "";
-request("http://ro-api.000webhostapp.com/ro-api/lastShout.txt", function (error, response, body) {
-    lastShout = body
-    });
-function wait(milleseconds) {
-    return new Promise(resolve => setTimeout(resolve, milleseconds))
+var lastImage = undefined
+//greyscale, invert, blur, flip
+
+function hashCode(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return hash;
+}
+
+client.on("message", message => {
+
+  if (message.content.startsWith("ro.role")) {
+    if (message.channel.id == "510926604554338305") {
+    message.delete()
+    msgs = message.content.split(" ");
+    colorcode = msgs[1];
+    if (colorcode == undefined) {
+      colorcode = '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
+    }
+    hasrole = false
+    message.guild.roles.forEach(m=> {
+      if (m.name == message.author.username) {
+        console.log('has role!')
+        hasrole = true
+        m.edit({
+          name: message.author.username,
+          mentionable: false,
+          color: colorcode
+        })
+      }
+
+
+    })
+
+    if (hasrole == false) {
+      message.guild.createRole({
+          name: message.author.username,
+          mentionable: false,
+          color: colorcode
+      }).then(role => {
+        message.member.addRole(role)
+      })
+      hasrole = true
+      }
+      message.reply("Successfully set role color to: " + colorcode).then(bm=> {
+        bm.delete(3000)
+      })
+    }
   }
 
 
 
-
-
-client.on("ready", a => {
-function logEvery2Seconds(i) {
-    setTimeout(() => {
-        logEvery2Seconds(++i);
-    }, 1500)
-}
-logEvery2Seconds(0);
-let i = 0;
-setInterval(() => {
-    request("http://ro-api.000webhostapp.com/ro-api/lastShout.txt", function (error, response, body) {
-        lastShout = body
-        });
-
-    if (lastShout == undefined) {
-    console.log('Error 404 | Shout undefined')
+  if (message.content.startsWith("p!flip")) {
+    var Attachment = (message.attachments).array();
+    if (Attachment[0] == undefined) {
+      if (lastImage == undefined) {
+        message.reply("You did not input an image to convert.")
+        return
+      }
     } else {
-    request("https://groups.rprxy.xyz/v1/groups/4511209", function (error, response, body) {
-        if (body == undefined) {
-            console.log('Error 404 | Proxy returned blank')
-        } else {
-        body = JSON.parse(body)
-        console.log(lastShout)
-        console.log(body["shout"]["body"])
-        if (lastShout == body["shout"]["body"]) {
-        } else {
-             url = ("http://ro-api.000webhostapp.com/ro-api/setShout.php?contents="+body["shout"]["body"]);
-        request(url, function (error, response, body) {
-        });
-        client.guilds.get('509104083681148939').channels.get('509868150276358155').send("@here " + body["shout"]["body"] + " | https://www.roblox.com/My/Groups.aspx?gid=4511209")
-        }
+      lastImage = Attachment[0].url
     }
-        });
+    
+    Jimp.read(lastImage)
+    
+    .then(lenna => {
+      return lenna
+        .rotate(90)
+        .write('export.png');
+    }).then(function(done) {
+      message.channel.send("Exported Image!", {
+        file: "export.png"
+    }).then(image => {
+      lastImage = (image.attachments).array()[0].url;
+    })
+    })
 
+  }
+
+  if (message.content.startsWith("p!greyscale")) {
+    var Attachment = (message.attachments).array();
+    if (Attachment[0] == undefined) {
+      if (lastImage == undefined) {
+        message.channel.send("You did not input an image to convert.")
+        return
+      }
+    } else {
+      lastImage = Attachment[0].url
     }
+    
+    Jimp.read(lastImage)
+    
+    .then(lenna => {
+      return lenna
+        .greyscale()
+        .write('export.png');
+    }).then(function(done) {
+      message.channel.send("Exported Image!", {
+        file: "export.png"
+    }).then(image => {
+      lastImage = (image.attachments).array()[0].url;
+    })
+    })
+
+  }
+
+  if (message.content.startsWith("p!blur")) {
+    var Attachment = (message.attachments).array();
+    if (Attachment[0] == undefined) {
+      if (lastImage == undefined) {
+        message.channel.send("You did not input an image to convert.")
+        return
+      }
+    } else {
+      lastImage = Attachment[0].url
+    }
+    
+    Jimp.read(lastImage)
+    
+    .then(lenna => {
+      return lenna
+        .blur(10)
+        .write('export.png');
+    }).then(function(done) {
+      message.channel.send("Exported Image!", {
+        file: "export.png"
+    }).then(image => {
+      lastImage = (image.attachments).array()[0].url;
+    })
+    })
+
+  }
+  
+ if (message.content.startsWith("p!invert")) {
+    var Attachment = (message.attachments).array();
+    if (Attachment[0] == undefined) {
+      if (lastImage == undefined) {
+        message.channel.send("You did not input an image to convert.")
+        return
+      }
+    } else {
+      lastImage = Attachment[0].url
+    }
+    
+    Jimp.read(lastImage)
+    
+    .then(lenna => {
+      return lenna
+        .invert()
+        .write('export.png');
+    }).then(function(done) {
+      message.channel.send("Exported Image!", {
+        file: "export.png"
+    }).then(image => {
+      lastImage = (image.attachments).array()[0].url;
+    })
+    })
+
+  }
+
+  if (message.content.startsWith("p!displace")) {
+    var Attachment = (message.attachments).array();
+    if (Attachment[0] == undefined) {
+      if (lastImage == undefined) {
+        message.channel.send("You did not input an image to convert.")
+        return
+      }
+    } else {
+      lastImage = Attachment[0].url
+    }
+    
+    Jimp.read(lastImage)
+    
+    .then(lenna => {
+      return lenna
+        .displace(1,5)
+        .write('export.png');
+    }).then(function(done) {
+      message.channel.send("Exported Image!", {
+        file: "export.png"
+    }).then(image => {
+      lastImage = (image.attachments).array()[0].url;
+    })
+    })
+
+  }
+
+});
 
 
-}, 2000)
 
-})
+
 client.login(DISCORD_TOKEN);
