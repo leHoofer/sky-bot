@@ -5,12 +5,11 @@ var DISCORD_TOKEN = process.env.TOKEN;
 var request = require('request');
 var lastImage = undefined
 var lastMessage = {};
+var sleep = require('sleep');
+
 //greyscale, invert, blur, flip
-function sleep(ms){
-   return new Promise(resolve=>{
-       setTimeout(resolve,ms)
-   })
-}
+
+
 
 client.on("message", message => {
 
@@ -210,16 +209,12 @@ client.on("message", message => {
 
 
   if (lastMessage[message.author.username] >= 5) {
-    async function warn(){
       message.reply("Please stop spamming!")
       message.delete()
-    }
   }
-  async function set() {
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-    await sleep(2000)
+    sleep.sleep(2)
     lastMessage[message.author.username] = lastMessage[message.author.username] - 1
-  }
 });
 
 client.on('guildMemberAdd', member => {
