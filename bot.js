@@ -13,9 +13,7 @@ var sleep = require('sleep');
 
 client.on("message", message => {
 
-  if (lastMessage[message.author.username] == undefined) {
-    lastMessage[message.author.username] = 0
-  } 
+
 
   if (message.content.startsWith("ro.role")) {
     if (message.guild === null) {
@@ -218,7 +216,7 @@ client.on("message", message => {
 });
 
 client.on('guildMemberAdd', member => {
-  member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
+  member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify` [**not finished I forgot I had this enabled LOL**]")
 })
 
 
