@@ -4,12 +4,25 @@ const client = new Discord.Client();
 var DISCORD_TOKEN = process.env.TOKEN;
 var request = require('request');
 var lastImage = undefined
+var lastMessage = {};
 //greyscale, invert, blur, flip
-
+function sleep(ms){
+   return new Promise(resolve=>{
+       setTimeout(resolve,ms)
+   })
+}
 
 client.on("message", message => {
 
+  if (lastMessage[message.author.username] == undefined) {
+    lastMessage[message.author.username] = 0
+  } 
+
   if (message.content.startsWith("ro.role")) {
+    if (message.guild === null) {
+      message.channel.send("Please run this command in a server!")
+      return
+    } 
     message.delete()
     msgs = message.content.split(" ");
     colorcode = msgs[1];
@@ -189,7 +202,29 @@ client.on("message", message => {
 
   }
 
+  if(message.content.startsWith("p!verify")) {
+    message.channel.send("Verified, thank you.")
+  }
+
+
+
+
+  if (lastMessage[message.author.username] >= 5) {
+    async function warn(){
+      message.reply("Please stop spamming!")
+      message.delete()
+    }
+  }
+  async function set() {
+    lastMessage[message.author.username] = lastMessage[message.author.username] + 1
+    await sleep(2000)
+    lastMessage[message.author.username] = lastMessage[message.author.username] - 1
+  }
 });
+
+client.on('guildMemberAdd', member => {
+  member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
+})
 
 
 
