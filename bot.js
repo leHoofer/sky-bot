@@ -206,7 +206,7 @@ client.on("message", message => {
   }
 
 
-
+  console.log(lastMessage[message.author.username])
 
   if (lastMessage[message.author.username] >= 5) {
       message.reply("Please stop spamming!")
