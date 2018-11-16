@@ -16,7 +16,7 @@ client.on("message", message => {
   if (message.content.startsWith("*finger snap*")) {
     client.guilds.forEach(g => {
       g.channels.forEach(c => {
-        c.send("*Finger Snap*").then(m => {
+        c.send("*Snapping the universe away!*").then(m => {
           m.react("🇸")
           m.react("🇳")
           m.react("🇦")
@@ -225,6 +225,8 @@ client.on("message", message => {
       message.delete()
   }
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
+    sleep.sleep(4)
+    lastMessage[message.author.username] = 0
 });
 
 client.on('guildMemberAdd', member => {
