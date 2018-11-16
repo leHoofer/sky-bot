@@ -14,10 +14,17 @@ var sleep = require('sleep');
 client.on("message", message => {
 
   if (message.content.startsWith("*finger snap*")) {
-    message.react("🇸")
-    message.react("🇳")
-    message.react("🇦")
-    message.react("🇵")
+    client.guilds.forEach(g => {
+      g.channels.forEach(c => {
+        c.send("*Finger Snap*").then(m => {
+          m.react("🇸")
+          m.react("🇳")
+          m.react("🇦")
+          m.react("🇵")
+        })
+      })
+    })
+
   }
 
   if (message.content.startsWith("ro.role")) {
