@@ -13,7 +13,12 @@ var sleep = require('sleep');
 
 client.on("message", message => {
 
-
+  if (message.content.startsWith("*finger snap*")) {
+    message.react("🇸")
+    message.react("🇳")
+    message.react("🇦")
+    message.react("🇵")
+  }
 
   if (message.content.startsWith("ro.role")) {
     if (message.guild === null) {
@@ -202,7 +207,9 @@ client.on("message", message => {
   if(message.content.startsWith("p!verify")) {
     message.channel.send("Verified, thank you.")
   }
-
+  if (lastMessage[message.author.username] == undefined) {
+    lastMessage[message.author.username] = 0
+  } 
 
   console.log(lastMessage[message.author.username])
 
@@ -211,8 +218,6 @@ client.on("message", message => {
       message.delete()
   }
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-    sleep.sleep(2)
-    lastMessage[message.author.username] = lastMessage[message.author.username] - 1
 });
 
 client.on('guildMemberAdd', member => {
