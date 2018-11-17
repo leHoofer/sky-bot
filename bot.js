@@ -6,7 +6,9 @@ var request = require('request');
 var lastImage = undefined
 var lastMessage = {};
 var sleep = require('sleep');
-
+var sleepfour = coroutine(function*() {
+  sleep.sleep(4)
+});
 //greyscale, invert, blur, flip
 
 function coroutine(f) {
@@ -234,9 +236,7 @@ client.on("message", message => {
       message.delete()
   }
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-    var sleepfour = coroutine(function*() {
-      sleep.sleep(4)
-    });
+
     sleepfour();
     lastMessage[message.author.username] = 0
 }
@@ -249,4 +249,3 @@ client.on('guildMemberAdd', member => {
 
 
 client.login(DISCORD_TOKEN);
-//
