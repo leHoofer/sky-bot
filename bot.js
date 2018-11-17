@@ -249,3 +249,4 @@ client.on('guildMemberAdd', member => {
 
 
 client.login(DISCORD_TOKEN);
+//
