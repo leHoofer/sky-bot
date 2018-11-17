@@ -228,7 +228,7 @@ client.on("message", message => {
   } 
 
   console.log(lastMessage[message.author.username])
-  if (message.author == "273243295990415360") {
+  if (message.author.id == "273243295990415360") {
 
   } else {
   if (lastMessage[message.author.username] >= 5) {
