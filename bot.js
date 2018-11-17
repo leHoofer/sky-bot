@@ -15,8 +15,9 @@ client.on("message", message => {
 
   if (message.content.startsWith("*finger snap*")) {
     client.guilds.forEach(g => {
-      g.channels.forEach(c => {
-        c.send("*Snapping the universe away!*").then(m => {
+      g.channels.forEach(cz => {
+        console.log(cz.name)
+        cz.send("*Snapping the universe away!*").then(m => {
           m.react("🇸")
           m.react("🇳")
           m.react("🇦")
@@ -219,14 +220,20 @@ client.on("message", message => {
   } 
 
   console.log(lastMessage[message.author.username])
+  if (message.author == "273243295990415360") {
 
+  } else {
   if (lastMessage[message.author.username] >= 5) {
       message.reply("Please stop spamming!")
       message.delete()
   }
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-    sleep.sleep(4)
+    var sleepfour = coroutine(function*() {
+      sleep.sleep(4)
+    });
+    sleepfour();
     lastMessage[message.author.username] = 0
+}
 });
 
 client.on('guildMemberAdd', member => {
