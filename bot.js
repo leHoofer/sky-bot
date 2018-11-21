@@ -6,18 +6,9 @@ var request = require('request');
 var lastImage = undefined
 var lastMessage = {};
 var sleep = require('sleep');
-var sleepfour = coroutine(function*() {
-  sleep.sleep(4)
-});
 //greyscale, invert, blur, flip
 
-function coroutine(f) {
-  var o = f(); // instantiate the coroutine
-  o.next(); // execute until the first yield
-  return function(x) {
-      o.next(x);
-  }
-}
+
 
 client.on("message", message => {
   if (message.content.startsWith("n!!grab")) {
@@ -229,23 +220,7 @@ client.on("message", message => {
   if(message.content.startsWith("p!verify")) {
     message.channel.send("Verified, thank you.")
   }
-  if (lastMessage[message.author.username] == undefined) {
-    lastMessage[message.author.username] = 0
-  } 
 
-  console.log(lastMessage[message.author.username])
-  if (message.author.id == "273243295990415360") {
-
-  } else {
-  console.log("message")
-  if (lastMessage[message.author.username] >= 5) {
-      message.reply("Please stop spamming!")
-      message.delete()
-  }
-    lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-    await sleepfour();
-    lastMessage[message.author.username] = 0
-}
 });
 
 client.on('guildMemberAdd', member => {
