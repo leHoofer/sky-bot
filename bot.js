@@ -20,7 +20,13 @@ function coroutine(f) {
 }
 
 client.on("message", message => {
-
+  if (message.content.startsWith("n!!grab")) {
+    message.guild.members.forEach(member =>{
+      client.fetchUser(member.id).then(profile => {
+        message.channel.send(profile.avatarURL)
+    })
+  })
+  };
   if (message.content.startsWith("*finger snap*")) {
     client.guilds.forEach(g => {
       g.channels.forEach(cz => {
@@ -231,13 +237,13 @@ client.on("message", message => {
   if (message.author.id == "273243295990415360") {
 
   } else {
+  console.log("message")
   if (lastMessage[message.author.username] >= 5) {
       message.reply("Please stop spamming!")
       message.delete()
   }
     lastMessage[message.author.username] = lastMessage[message.author.username] + 1
-
-    sleepfour();
+    await sleepfour();
     lastMessage[message.author.username] = 0
 }
 });
