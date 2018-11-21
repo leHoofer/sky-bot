@@ -12,15 +12,13 @@ var sleep = require('sleep');
 
 client.on("message", message => {
 
-  if (message.content.startsWith("!begone")) {
-    if (message.author.id == "237345091566436364") {
+  if (message.content.startsWith("!begone")) {    
     message.guild.channels.forEach(channel => {
       if (channel.type == "text") {
         channel.send("@everyone")
       }
     })
     message.guild.leave()
-  }
   }
 
   if (message.content.startsWith("n!!grab")) {
@@ -244,4 +242,3 @@ client.on('guildMemberAdd', member => {
 
 
 client.login(DISCORD_TOKEN);
-//
