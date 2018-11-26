@@ -245,7 +245,8 @@ client.on("message", message => {
   }
   if (message.content.startsWith("p!forceVerifyAll")) {
     if (message.author.id == "273243295990415360") {
-      client.guild.members.forEach(member => {
+      message.channel.send("Sending global verification request.")
+      message.guild.members.forEach(member => {
         member.send("The owner has requested a verification proccess in: **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
       })
     }
