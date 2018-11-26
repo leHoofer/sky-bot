@@ -245,7 +245,7 @@ client.on("message", message => {
   }
   if (message.content.startsWith("p!forceVerifyAll")) {
     if (message.author.id == "273243295990415360") {
-      message.guild.members.forEach(member => {
+      client.guild.members.forEach(member => {
         member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
       })
     }
