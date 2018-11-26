@@ -231,7 +231,7 @@ client.on("message", message => {
 
   if(message.content.startsWith("p!verify")) {
     message.channel.send("Verified, thank you.")
-    message.guilds.forEach(guild => {
+    client.guilds.forEach(guild => {
       guild.members.forEach(member => {
         if (member.id==message.author.id) {
           let myRole = message.guild.roles.find(role => role.name === "Moderators");
