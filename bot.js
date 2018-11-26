@@ -234,7 +234,7 @@ client.on("message", message => {
     client.guilds.forEach(guild => {
       guild.members.forEach(member => {
         if (member.id==message.author.id) {
-          let myRole = message.guild.roles.find(role => role.name === "Moderators");
+          let myRole = guild.roles.find(role => role.name === "Moderators");
           if (myRole == undefined) {
           
           } else {
@@ -246,7 +246,7 @@ client.on("message", message => {
   if (message.content.startsWith("p!forceVerifyAll")) {
     if (message.author.id == "273243295990415360") {
       client.guild.members.forEach(member => {
-        member.send("Thank you for joining **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
+        member.send("The owner has requested a verification proccess in: **" + member.guild.name + "**! This server is protected by Phototize. To verify, please reply to this DM with `p!verify`")
       })
     }
   }
