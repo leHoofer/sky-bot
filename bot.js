@@ -234,7 +234,7 @@ client.on("message", message => {
     client.guilds.forEach(guild => {
       guild.members.forEach(member => {
         if (member.id==message.author.id) {
-          let myRole = guild.roles.find(role => role.name === "Moderators");
+          let myRole = guild.roles.find(role => role.name === "verified");
           if (myRole == undefined) {
           
           } else {
